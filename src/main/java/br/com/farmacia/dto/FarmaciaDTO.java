@@ -14,4 +14,7 @@ public class FarmaciaDTO implements Serializable {
     private String localidade;
     private Boolean ativo;
 
+    private String administradorSenha;
+    private String administradorNome;
+
 }

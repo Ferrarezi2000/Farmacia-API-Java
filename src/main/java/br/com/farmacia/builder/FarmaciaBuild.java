@@ -10,6 +10,7 @@ public class FarmaciaBuild {
     public Farmacia build(Farmacia farmacia, FarmaciaDTO dto) {
         farmacia.setAtivo(dto.getAtivo());
         farmacia.setNome(dto.getNome());
+        farmacia.setLocalidade(dto.getLocalidade());
 
         return farmacia;
     }

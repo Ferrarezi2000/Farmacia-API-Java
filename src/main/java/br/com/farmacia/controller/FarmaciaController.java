@@ -1,7 +1,10 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.FarmaciaBuild;
+import br.com.farmacia.config.Security;
+import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.FarmaciaDTO;
+import br.com.farmacia.model.Administrador;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.EnderecoRepository;
@@ -23,6 +26,7 @@ public class FarmaciaController extends AbstractRestController{
     @Autowired private FarmaciaRepository repository;
     @Autowired private FarmaciaBuild build;
     @Autowired private EnderecoRepository enderecoRepository;
+    @Autowired private Security security;
 
     @GetMapping
     public ResponseEntity<List<Farmacia>> listar() {
@@ -31,6 +35,7 @@ public class FarmaciaController extends AbstractRestController{
 
     @PostMapping
     public ResponseEntity<Farmacia> cadastrar(@RequestBody FarmaciaDTO dto) {
+        security.check(dto.getAdministradorSenha(), dto.getAdministradorNome());
         repository.save(this.build.build(new Farmacia(), dto));
         return ResponseRest.created("Farmácia cadastrada com sucesso!");
     }
