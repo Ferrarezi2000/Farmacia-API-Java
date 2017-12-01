@@ -13,6 +13,7 @@ public class AdministradorDTO implements Serializable {
     private String nome;
     private String sobrenome;
     private String senha;
+    private String token;
     private Boolean ativo;
 
 }

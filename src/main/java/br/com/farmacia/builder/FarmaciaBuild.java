@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 public class FarmaciaBuild {
 
     public Farmacia build(Farmacia farmacia, FarmaciaDTO dto) {
-        farmacia.setAtivo(dto.getAtivo());
+        if (dto.getId() == null) {
+            farmacia.setAtivo(true);
+        }
         farmacia.setNome(dto.getNome());
         farmacia.setLocalidade(dto.getLocalidade());
 

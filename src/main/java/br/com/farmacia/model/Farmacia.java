@@ -25,6 +25,6 @@ public class Farmacia implements Serializable {
     @NotEmpty
     private String localidade;
 
-    private Boolean ativo = true;
+    private Boolean ativo;
 
 }

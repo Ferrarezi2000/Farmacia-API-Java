@@ -14,7 +14,11 @@ public class EnderecoBuild {
 
     public Endereco build(Endereco endereco, EnderecoDTO dto) {
         Farmacia farmacia = farmaciaRepository.findOne(dto.getFarmaciaId());
-        endereco.setAtivo(dto.getAtivo());
+
+        if (dto.getId() == null) {
+            endereco.setAtivo(true);
+        }
+
         endereco.setBairro(dto.getBairro());
         endereco.setFarmacia(farmacia);
         endereco.setLougradouro(dto.getLougradouro());

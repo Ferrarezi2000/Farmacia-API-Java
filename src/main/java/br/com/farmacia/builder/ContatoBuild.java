@@ -14,7 +14,10 @@ public class ContatoBuild {
 
     public Contato build(Contato contato, ContatoDTO dto) {
         Farmacia farmacia = farmaciaRepository.findOne(dto.getFarmaciaId());
-        contato.setAtivo(dto.getAtivo());
+
+        if (dto.getId() == null) {
+            farmacia.setAtivo(true);
+        }
         contato.setFarmacia(farmacia);
         contato.setTexto(dto.getTexto());
         contato.setTipo(dto.getTipo());

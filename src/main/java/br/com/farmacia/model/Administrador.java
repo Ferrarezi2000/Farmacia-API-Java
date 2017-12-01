@@ -28,6 +28,9 @@ public class Administrador implements Serializable {
     @NotEmpty
     private String senha;
 
-    private Boolean ativo = true;
+    @NotEmpty
+    private String token;
+
+    private Boolean ativo;
 
 }

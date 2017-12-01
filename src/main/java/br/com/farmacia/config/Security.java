@@ -11,9 +11,9 @@ public class Security {
 
     @Autowired private AdministradorRepository administradorRepository;
 
-    public void check(String senha, String nome) {
+    public void check(String token) {
 
-        Administrador administrador = administradorRepository.findTopBySenhaAndNome(senha, nome);
+        Administrador administrador = administradorRepository.findTopByToken(token);
         Assert.notNull(administrador, "Acesso não autorizado!");
 
     }

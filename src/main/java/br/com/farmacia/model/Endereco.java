@@ -34,6 +34,6 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "id_farmacia")
     private Farmacia farmacia;
 
-    private Boolean ativo = true;
+    private Boolean ativo;
 
 }
