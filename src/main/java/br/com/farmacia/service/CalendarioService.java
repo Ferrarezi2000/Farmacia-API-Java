@@ -14,6 +14,7 @@ public class CalendarioService {
     public void comporCalendario(PreencherCalendarioDTO dto) {
 
         for (int i = 1; i <= dto.getDias(); i++) {
+
             Calendario calendario = new Calendario();
             calendario.setDia(i);
             calendario.setMes(dto.getMes());
