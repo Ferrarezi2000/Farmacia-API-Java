@@ -3,7 +3,6 @@ package br.com.farmacia.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,12 +19,17 @@ public class Plantao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    private String data;
-
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
     private Farmacia farmacia;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_calendario")
+    private Calendario calendario;
+
+    @Transient private Endereco endereco;
+
 
 }

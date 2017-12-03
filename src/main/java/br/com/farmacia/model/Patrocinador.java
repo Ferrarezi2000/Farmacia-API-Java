@@ -12,9 +12,9 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(catalog = "farmacia", name = "farmacia")
+@Table(catalog = "farmacia", name = "patrocinador")
 @EqualsAndHashCode
-public class Farmacia implements Serializable {
+public class Patrocinador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,6 @@ public class Farmacia implements Serializable {
     @NotEmpty
     private String nome;
 
-    @NotEmpty
-    private String localidade;
-
     private Boolean ativo;
-
-    private Boolean vip;
 
 }

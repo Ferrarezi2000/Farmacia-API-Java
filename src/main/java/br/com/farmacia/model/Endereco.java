@@ -21,7 +21,7 @@ public class Endereco implements Serializable {
     private Long id;
 
     @NotEmpty
-    private String lougradouro;
+    private String logradouro;
 
     @NotEmpty
     private String bairro;
@@ -29,10 +29,13 @@ public class Endereco implements Serializable {
     @NotEmpty
     private String numero;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
     private Farmacia farmacia;
+
+    @ManyToOne
+    @JoinColumn(name = "id_patrocinador")
+    private Patrocinador patrocinador;
 
     private Boolean ativo;
 

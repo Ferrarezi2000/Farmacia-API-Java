@@ -10,10 +10,11 @@ import java.io.Serializable;
 public class EnderecoDTO implements Serializable {
 
     private Long id;
-    private String lougradouro;
+    private String logradouro;
     private String bairro;
     private String numero;
     private Long farmaciaId;
+    private Long patrocinadorId;
     private Boolean ativo;
 
 }

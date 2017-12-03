@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
 
-    Administrador findTopByToken(String token);
+    Administrador findTopBySobrenomeAndToken(String sobrenome, String token);
 
 }

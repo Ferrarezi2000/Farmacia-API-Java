@@ -12,6 +12,8 @@ public class AdministradorBuild {
     public Administrador build(Administrador administrador, AdministradorDTO dto) {
         if (dto.getId() == null) {
             administrador.setAtivo(true);
+        } else {
+            administrador.setAtivo(dto.getAtivo());
         }
 
         administrador.setNome(dto.getNome());

@@ -12,22 +12,21 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(catalog = "farmacia", name = "farmacia")
+@Table(catalog = "farmacia", name = "calendario")
 @EqualsAndHashCode
-public class Farmacia implements Serializable {
+public class Calendario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    private String nome;
+    @NotNull
+    private Integer dia;
 
     @NotEmpty
-    private String localidade;
+    private String mes;
 
-    private Boolean ativo;
-
-    private Boolean vip;
+    @NotNull
+    private Integer ano;
 
 }

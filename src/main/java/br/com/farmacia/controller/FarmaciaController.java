@@ -5,7 +5,6 @@ import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.FarmaciaDTO;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.ResponseRest;
-import br.com.farmacia.repository.EnderecoRepository;
 import br.com.farmacia.repository.FarmaciaRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class FarmaciaController extends AbstractRestController{
 
     @Autowired private FarmaciaRepository repository;
     @Autowired private FarmaciaBuild build;
-    @Autowired private EnderecoRepository enderecoRepository;
     @Autowired private Security security;
 
     @GetMapping
@@ -33,7 +31,7 @@ public class FarmaciaController extends AbstractRestController{
 
     @PostMapping
     public ResponseEntity<Farmacia> cadastrar(@RequestBody FarmaciaDTO dto) {
-        security.check(dto.getAdministradorToken());
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         repository.save(this.build.build(new Farmacia(), dto));
         return ResponseRest.created("Farmácia cadastrada com sucesso!");
     }
@@ -58,9 +56,4 @@ public class FarmaciaController extends AbstractRestController{
         return ResponseRest.ok("Farmácia excluída com suecesso.");
     }
 
-    @GetMapping("/enderecos/{id}")
-    public ResponseEntity<?> listaEnderecos(@PathVariable("id") Farmacia entity) {
-        Assert.notNull(entity, "Farmácia não encontrada.");
-        return ResponseRest.list(enderecoRepository.findAllByFarmacia(entity));
-    }
 }
