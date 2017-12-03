@@ -1,10 +1,13 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.CalendarioBuild;
+import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.CalendarioDTO;
+import br.com.farmacia.dto.PreencherCalendarioDTO;
 import br.com.farmacia.model.Calendario;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.CalendarioRepository;
+import br.com.farmacia.service.CalendarioService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +23,9 @@ import java.util.List;
 public class CalendarioController extends AbstractRestController{
 
     @Autowired private CalendarioRepository repository;
+    @Autowired private CalendarioService service;
     @Autowired private CalendarioBuild build;
+    @Autowired private Security security;
 
     @GetMapping
     public ResponseEntity<List<Calendario>> listar() {
@@ -51,5 +56,12 @@ public class CalendarioController extends AbstractRestController{
         Assert.notNull(entity, "Calendario não encontrado.");
         repository.delete(entity);
         return ResponseRest.ok("Calendario excluído com suecesso.");
+    }
+
+    @PostMapping("/comporCalendario")
+    public ResponseEntity<?> comporCalendario(@RequestBody PreencherCalendarioDTO dto){
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
+        service.comporCalendario(dto);
+        return ResponseRest.ok("Completo");
     }
 }
