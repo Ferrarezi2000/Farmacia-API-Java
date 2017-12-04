@@ -13,4 +13,7 @@ public class PatrocinadorDTO implements Serializable {
     private String nome;
     private Boolean ativo;
 
+    private String administradorToken;
+    private String administradorSobrenome;
+
 }

@@ -1,6 +1,7 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.AdministradorBuild;
+import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.model.Administrador;
 import br.com.farmacia.model.ResponseRest;
@@ -21,6 +22,7 @@ public class AdministradorController extends AbstractRestController{
 
     @Autowired private AdministradorRepository repository;
     @Autowired private AdministradorBuild build;
+    @Autowired private Security security;
 
     @GetMapping
     public ResponseEntity<List<Administrador>> listar() {
@@ -29,18 +31,21 @@ public class AdministradorController extends AbstractRestController{
 
     @PostMapping
     public ResponseEntity<Administrador> cadastrar(@RequestBody AdministradorDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         repository.save(this.build.build(new Administrador(), dto));
         return ResponseRest.created("Administrador cadastrado com sucesso!");
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Administrador> buscar(@PathVariable("id") Administrador entity) {
+        security.check(entity.getSobrenome(), entity.getToken());
         Assert.notNull(entity, "Administrador não encontrado.");
         return ResponseRest.object(entity);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Administrador> alterar(@PathVariable("id") Administrador entity, @RequestBody AdministradorDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Endereço não encontrado.");
         repository.save(this.build.build(new Administrador(), dto));
         return ResponseRest.ok("Administrador alterado com sucesso!");
@@ -48,6 +53,7 @@ public class AdministradorController extends AbstractRestController{
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Administrador> deletar(@PathVariable("id") Administrador entity) {
+        security.check(entity.getSobrenome(), entity.getToken());
         Assert.notNull(entity, "Administrador não encontrado.");
         repository.delete(entity);
         return ResponseRest.ok("Administrador excluído com suecesso.");

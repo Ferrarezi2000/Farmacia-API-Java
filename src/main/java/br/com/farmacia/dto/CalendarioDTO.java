@@ -14,5 +14,7 @@ public class CalendarioDTO implements Serializable {
     private String mes;
     private Integer ano;
 
+    private String administradorToken;
+    private String administradorSobrenome;
 
 }

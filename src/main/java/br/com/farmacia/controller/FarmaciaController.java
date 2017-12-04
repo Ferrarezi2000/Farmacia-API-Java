@@ -2,6 +2,7 @@ package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.FarmaciaBuild;
 import br.com.farmacia.config.Security;
+import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.FarmaciaDTO;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.ResponseRest;
@@ -44,13 +45,15 @@ public class FarmaciaController extends AbstractRestController{
 
     @PutMapping("/{id}")
     public ResponseEntity<Farmacia> alterar(@PathVariable("id") Farmacia entity, @RequestBody FarmaciaDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Farmácia não encontrada.");
         repository.save(this.build.build(new Farmacia(), dto));
         return ResponseRest.ok("Farmácia alterada com sucesso!");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Farmacia> deletar(@PathVariable("id") Farmacia entity) {
+    public ResponseEntity<Farmacia> deletar(@PathVariable("id") Farmacia entity, @RequestBody AdministradorDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Farmácia não encontrada.");
         repository.delete(entity);
         return ResponseRest.ok("Farmácia excluída com suecesso.");

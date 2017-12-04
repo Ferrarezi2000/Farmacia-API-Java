@@ -14,4 +14,7 @@ public class PlantaoDTO implements Serializable {
     private Long farmaciaId;
     private Long calendarioId;
     private Endereco endereco;
+
+    private String administradorToken;
+    private String administradorSobrenome;
 }

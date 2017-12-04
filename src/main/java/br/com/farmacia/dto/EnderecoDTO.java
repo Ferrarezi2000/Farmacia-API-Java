@@ -17,4 +17,8 @@ public class EnderecoDTO implements Serializable {
     private Long patrocinadorId;
     private Boolean ativo;
 
+    private String administradorToken;
+    private String administradorSobrenome;
+
+
 }

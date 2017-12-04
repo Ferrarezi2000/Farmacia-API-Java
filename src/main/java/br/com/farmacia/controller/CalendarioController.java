@@ -2,6 +2,7 @@ package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.CalendarioBuild;
 import br.com.farmacia.config.Security;
+import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.CalendarioDTO;
 import br.com.farmacia.dto.PreencherCalendarioDTO;
 import br.com.farmacia.model.Calendario;
@@ -34,6 +35,7 @@ public class CalendarioController extends AbstractRestController{
 
     @PostMapping
     public ResponseEntity<Calendario> cadastrar(@RequestBody CalendarioDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         repository.save(this.build.build(new Calendario(), dto));
         return ResponseRest.created("Calendario cadastrado com sucesso!");
     }
@@ -46,13 +48,15 @@ public class CalendarioController extends AbstractRestController{
 
     @PutMapping("/{id}")
     public ResponseEntity<Calendario> alterar(@PathVariable("id") Calendario entity, @RequestBody CalendarioDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Calendario não encontrado.");
         repository.save(this.build.build(new Calendario(), dto));
         return ResponseRest.ok("Calendario alterado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Calendario> deletar(@PathVariable("id") Calendario entity) {
+    public ResponseEntity<Calendario> deletar(@PathVariable("id") Calendario entity, @RequestBody AdministradorDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Calendario não encontrado.");
         repository.delete(entity);
         return ResponseRest.ok("Calendario excluído com suecesso.");

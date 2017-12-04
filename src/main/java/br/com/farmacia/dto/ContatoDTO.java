@@ -15,4 +15,7 @@ public class ContatoDTO implements Serializable {
     private Long farmaciaId;
     private Boolean ativo;
 
+    private String administradorToken;
+    private String administradorSobrenome;
+
 }

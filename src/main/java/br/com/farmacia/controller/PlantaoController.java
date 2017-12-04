@@ -1,6 +1,9 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.PlantaoBuild;
+import br.com.farmacia.config.Security;
+import br.com.farmacia.dto.AdministradorDTO;
+import br.com.farmacia.dto.BuscarPlantoesDTO;
 import br.com.farmacia.dto.PlantaoDTO;
 import br.com.farmacia.model.Calendario;
 import br.com.farmacia.model.Plantao;
@@ -26,6 +29,7 @@ public class PlantaoController extends AbstractRestController{
     @Autowired private CalendarioRepository calendarioRepository;
     @Autowired private PlantaoBuild build;
     @Autowired private PlantaoService plantaoService;
+    @Autowired private Security security;
 
     @GetMapping
     public ResponseEntity<List<Plantao>> listar() {
@@ -34,6 +38,7 @@ public class PlantaoController extends AbstractRestController{
 
     @PostMapping
     public ResponseEntity<Plantao> cadastrar(@RequestBody PlantaoDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         repository.save(this.build.build(new Plantao(), dto));
         return ResponseRest.created("Plantão cadastrado com sucesso!");
     }
@@ -46,22 +51,24 @@ public class PlantaoController extends AbstractRestController{
 
     @PutMapping("/{id}")
     public ResponseEntity<Plantao> alterar(@PathVariable("id") Plantao entity, @RequestBody PlantaoDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Endereço não encontrado.");
         repository.save(this.build.build(new Plantao(), dto));
         return ResponseRest.ok("Plantao alterado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Plantao> deletar(@PathVariable("id") Plantao entity) {
+    public ResponseEntity<Plantao> deletar(@PathVariable("id") Plantao entity, @RequestBody AdministradorDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Plantao não encontrado.");
         repository.delete(entity);
         return ResponseRest.ok("Plantao excluído com suecesso.");
     }
 
 
-    @GetMapping("/plantoes/{dia}/{mes}")
-    public ResponseEntity<?> plantoes(@PathVariable("dia") Integer dia, @PathVariable("mes") String mes) {
-        Calendario calendario = calendarioRepository.findTopByDiaAndMes(dia, mes);
+    @GetMapping("/plantoes")
+    public ResponseEntity<?> plantoes(@RequestBody BuscarPlantoesDTO dto) {
+        Calendario calendario = calendarioRepository.findTopByDiaAndMes(dto.getDia(), dto.getMes());
         Assert.notNull(calendario, "Plantão ainda não cadastrado");
         return ResponseRest.list(plantaoService.plantoes(calendario));
     }

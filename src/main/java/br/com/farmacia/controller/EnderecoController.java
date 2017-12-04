@@ -1,6 +1,8 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.builder.EnderecoBuild;
+import br.com.farmacia.config.Security;
+import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.EnderecoDTO;
 import br.com.farmacia.model.Endereco;
 import br.com.farmacia.model.ResponseRest;
@@ -21,6 +23,7 @@ public class EnderecoController extends AbstractRestController{
 
     @Autowired private EnderecoRepository repository;
     @Autowired private EnderecoBuild build;
+    @Autowired private Security security;
 
     @GetMapping
     public ResponseEntity<List<Endereco>> listar() {
@@ -29,6 +32,7 @@ public class EnderecoController extends AbstractRestController{
 
     @PostMapping
     public ResponseEntity<Endereco> cadastrar(@RequestBody EnderecoDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         repository.save(this.build.build(new Endereco(), dto));
         return ResponseRest.created("Endereço cadastrado com sucesso!");
     }
@@ -41,13 +45,15 @@ public class EnderecoController extends AbstractRestController{
 
     @PutMapping("/{id}")
     public ResponseEntity<Endereco> alterar(@PathVariable("id") Endereco entity, @RequestBody EnderecoDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Endereço não encontrado.");
         repository.save(this.build.build(new Endereco(), dto));
         return ResponseRest.ok("Endereço alterado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Endereco> deletar(@PathVariable("id") Endereco entity) {
+    public ResponseEntity<Endereco> deletar(@PathVariable("id") Endereco entity, @RequestBody AdministradorDTO dto) {
+        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Endereço não encontrado.");
         repository.delete(entity);
         return ResponseRest.ok("Endereço excluído com suecesso.");
