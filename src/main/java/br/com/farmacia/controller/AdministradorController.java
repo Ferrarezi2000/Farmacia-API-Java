@@ -4,6 +4,7 @@ import br.com.farmacia.builder.AdministradorBuild;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.model.Administrador;
+import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.AdministradorRepository;
 import br.com.farmacia.service.AdministradorService;
@@ -29,6 +30,13 @@ public class AdministradorController extends AbstractRestController{
     @GetMapping
     public ResponseEntity<List<Administrador>> listar() {
         return ResponseRest.list(repository.findAll());
+    }
+
+    @PostMapping("/logar")
+    public ResponseEntity<Administrador> logar(@RequestBody AdministradorDTO dto) {
+        Administrador administrador = repository.findTopByNomeAndSenha(dto.getNome(), dto.getSenha());
+        Assert.notNull(administrador, "Nome ou Senha Inválidos!");
+        return ResponseRest.object(administrador);
     }
 
     @GetMapping("/cadastroInicial/{senha}")

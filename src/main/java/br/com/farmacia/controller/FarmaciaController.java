@@ -30,6 +30,11 @@ public class FarmaciaController extends AbstractRestController{
         return ResponseRest.list(repository.findAll());
     }
 
+    @GetMapping("/vip")
+    public ResponseEntity<List<Farmacia>> vip(){
+        return ResponseRest.list(repository.findAllByVipIsTrue());
+    }
+
     @PostMapping
     public ResponseEntity<Farmacia> cadastrar(@RequestBody FarmaciaDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());

@@ -7,4 +7,6 @@ public interface AdministradorRepository extends JpaRepository<Administrador, Lo
 
     Administrador findTopBySobrenomeAndToken(String sobrenome, String token);
 
+    Administrador findTopByNomeAndSenha(String nome, String senha);
+
 }

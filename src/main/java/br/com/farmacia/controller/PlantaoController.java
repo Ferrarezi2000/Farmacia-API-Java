@@ -66,7 +66,7 @@ public class PlantaoController extends AbstractRestController{
     }
 
 
-    @GetMapping("/plantoes")
+    @PostMapping("/plantoes")
     public ResponseEntity<?> plantoes(@RequestBody BuscarPlantoesDTO dto) {
         Calendario calendario = calendarioRepository.findTopByDiaAndMes(dto.getDia(), dto.getMes());
         Assert.notNull(calendario, "Plantão ainda não cadastrado");
