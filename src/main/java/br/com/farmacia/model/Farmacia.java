@@ -6,8 +6,8 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -29,5 +29,11 @@ public class Farmacia implements Serializable {
     private Boolean ativo;
 
     private Boolean vip;
+
+    private BigDecimal valorMensal;
+
+    @ManyToOne
+    @JoinColumn(name = "id_administrador_comissao")
+    private Administrador administrador;
 
 }

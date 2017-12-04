@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -24,5 +25,12 @@ public class Patrocinador implements Serializable {
     private String nome;
 
     private Boolean ativo;
+
+    @NotNull
+    private BigDecimal valorMensal;
+
+    @ManyToOne
+    @JoinColumn(name = "id_administrador_comissao")
+    private Administrador administrador;
 
 }

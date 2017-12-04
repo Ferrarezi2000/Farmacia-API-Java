@@ -4,16 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
 public class FarmaciaDTO implements Serializable {
 
     private Long id;
+    private Long administradorId;
     private String nome;
     private String localidade;
     private Boolean ativo;
     private Boolean vip;
+    private BigDecimal valorMensal;
 
     private String administradorToken;
     private String administradorSobrenome;

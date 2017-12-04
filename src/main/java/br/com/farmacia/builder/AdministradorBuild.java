@@ -22,7 +22,6 @@ public class AdministradorBuild {
 
         UUID uuid = UUID.randomUUID();
         String token = uuid.toString();
-        System.out.println(token.substring(0,20));
 
         administrador.setToken(token);
 

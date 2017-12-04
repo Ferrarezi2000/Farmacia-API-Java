@@ -6,6 +6,7 @@ import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.model.Administrador;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.AdministradorRepository;
+import br.com.farmacia.service.AdministradorService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,19 @@ import java.util.List;
 public class AdministradorController extends AbstractRestController{
 
     @Autowired private AdministradorRepository repository;
+    @Autowired private AdministradorService service;
     @Autowired private AdministradorBuild build;
     @Autowired private Security security;
 
     @GetMapping
     public ResponseEntity<List<Administrador>> listar() {
         return ResponseRest.list(repository.findAll());
+    }
+
+    @GetMapping("/cadastroInicial/{senha}")
+    public ResponseEntity<Administrador> cadastroInicial(@PathVariable("senha") Integer senha) {
+        Assert.isTrue(senha.equals(2000), "Acesso negado!");
+        return ResponseRest.ok(service.cadastrarAdmInicial(new Administrador()));
     }
 
     @PostMapping

@@ -1,13 +1,19 @@
 package br.com.farmacia.builder;
 
 import br.com.farmacia.dto.FarmaciaDTO;
+import br.com.farmacia.model.Administrador;
 import br.com.farmacia.model.Farmacia;
+import br.com.farmacia.repository.AdministradorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FarmaciaBuild {
 
+    @Autowired private AdministradorRepository administradorRepository;
+
     public Farmacia build(Farmacia farmacia, FarmaciaDTO dto) {
+        Administrador administrador = administradorRepository.findOne(dto.getAdministradorId());
 
         if (dto.getId() == null) {
             farmacia.setAtivo(true);
@@ -15,6 +21,8 @@ public class FarmaciaBuild {
             farmacia.setAtivo(dto.getAtivo());
         }
 
+        farmacia.setAdministrador(administrador);
+        farmacia.setValorMensal(dto.getValorMensal());
         farmacia.setNome(dto.getNome());
         farmacia.setLocalidade(dto.getLocalidade());
         farmacia.setVip(dto.getVip());
