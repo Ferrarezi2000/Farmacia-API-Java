@@ -13,7 +13,10 @@ public class FarmaciaBuild {
     @Autowired private AdministradorRepository administradorRepository;
 
     public Farmacia build(Farmacia farmacia, FarmaciaDTO dto) {
-        Administrador administrador = administradorRepository.findOne(dto.getAdministradorId());
+        if (dto.getAdministradorId() != null) {
+            Administrador administrador = administradorRepository.findOne(dto.getAdministradorId());
+            farmacia.setAdministrador(administrador);
+        }
 
         if (dto.getId() == null) {
             farmacia.setAtivo(true);
@@ -21,7 +24,6 @@ public class FarmaciaBuild {
             farmacia.setAtivo(dto.getAtivo());
         }
 
-        farmacia.setAdministrador(administrador);
         farmacia.setValorMensal(dto.getValorMensal());
         farmacia.setNome(dto.getNome());
         farmacia.setLocalidade(dto.getLocalidade());
