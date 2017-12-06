@@ -1,6 +1,6 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.builder.ContatoBuild;
+import br.com.farmacia.builder.alterar.ContatoBuild;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.ContatoDTO;

@@ -1,4 +1,4 @@
-package br.com.farmacia.builder;
+package br.com.farmacia.builder.alterar;
 
 import br.com.farmacia.dto.ContatoDTO;
 import br.com.farmacia.model.Contato;
@@ -15,11 +15,7 @@ public class ContatoBuild {
     public Contato build(Contato contato, ContatoDTO dto) {
         Farmacia farmacia = farmaciaRepository.findOne(dto.getFarmaciaId());
 
-        if (dto.getId() == null) {
-            contato.setAtivo(true);
-        } else {
-            contato.setAtivo(dto.getAtivo());
-        }
+        contato.setAtivo(dto.getAtivo());
         contato.setFarmacia(farmacia);
         contato.setTexto(dto.getTexto());
         contato.setTipo(dto.getTipo());

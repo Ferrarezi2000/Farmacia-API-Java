@@ -1,6 +1,6 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.builder.EnderecoBuild;
+import br.com.farmacia.builder.alterar.EnderecoBuild;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.EnderecoDTO;

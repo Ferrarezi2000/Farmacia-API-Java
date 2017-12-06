@@ -1,6 +1,7 @@
-package br.com.farmacia.builder;
+package br.com.farmacia.builder.alterar;
 
 import br.com.farmacia.dto.FarmaciaDTO;
+import br.com.farmacia.dto.FormCompletoDTO;
 import br.com.farmacia.model.Administrador;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.repository.AdministradorRepository;
@@ -17,13 +18,7 @@ public class FarmaciaBuild {
             Administrador administrador = administradorRepository.findOne(dto.getAdministradorId());
             farmacia.setAdministrador(administrador);
         }
-
-        if (dto.getId() == null) {
-            farmacia.setAtivo(true);
-        } else {
-            farmacia.setAtivo(dto.getAtivo());
-        }
-
+        farmacia.setAtivo(dto.getAtivo());
         farmacia.setValorMensal(dto.getValorMensal());
         farmacia.setNome(dto.getNome());
         farmacia.setLocalidade(dto.getLocalidade());

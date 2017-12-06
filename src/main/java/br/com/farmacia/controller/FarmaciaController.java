@@ -1,11 +1,19 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.builder.FarmaciaBuild;
+import br.com.farmacia.builder.alterar.FarmaciaBuild;
+import br.com.farmacia.builder.cadastro.ContatoBuildCadastro;
+import br.com.farmacia.builder.cadastro.EnderecoBuildCadastro;
+import br.com.farmacia.builder.cadastro.FarmaciaBuildCadastro;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.FarmaciaDTO;
+import br.com.farmacia.dto.FormCompletoDTO;
+import br.com.farmacia.model.Contato;
+import br.com.farmacia.model.Endereco;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.ResponseRest;
+import br.com.farmacia.repository.ContatoRepository;
+import br.com.farmacia.repository.EnderecoRepository;
 import br.com.farmacia.repository.FarmaciaRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +30,12 @@ import java.util.List;
 public class FarmaciaController extends AbstractRestController{
 
     @Autowired private FarmaciaRepository repository;
+    @Autowired private EnderecoRepository enderecoRepository;
+    @Autowired private ContatoRepository contatoRepository;
+    @Autowired private FarmaciaBuildCadastro farmaciaBuildCadastro;
+    @Autowired private EnderecoBuildCadastro enderecoBuildCadastro;
+    @Autowired private ContatoBuildCadastro contatoBuildCadastro;
+
     @Autowired private FarmaciaBuild build;
     @Autowired private Security security;
 
@@ -36,10 +50,12 @@ public class FarmaciaController extends AbstractRestController{
     }
 
     @PostMapping
-    public ResponseEntity<Farmacia> cadastrar(@RequestBody FarmaciaDTO dto) {
+    public ResponseEntity<?> cadastrar(@RequestBody FormCompletoDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
-        repository.save(this.build.build(new Farmacia(), dto));
-        return ResponseRest.created("Farmácia cadastrada com sucesso!");
+        Farmacia farmacia = repository.save(this.farmaciaBuildCadastro.build(new Farmacia(), dto));
+        enderecoRepository.save(enderecoBuildCadastro.build(new Endereco(), dto, farmacia));
+        contatoRepository.save(contatoBuildCadastro.build(new Contato(), dto, farmacia));
+        return ResponseRest.ok("Farmácia cadastrada com sucesso.");
     }
 
     @GetMapping("/{id}")

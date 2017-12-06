@@ -1,4 +1,4 @@
-package br.com.farmacia.builder;
+package br.com.farmacia.builder.alterar;
 
 import br.com.farmacia.dto.EnderecoDTO;
 import br.com.farmacia.model.Endereco;
@@ -25,11 +25,7 @@ public class EnderecoBuild {
             endereco.setPatrocinador(patrocinador);
         }
 
-        if (dto.getId() == null) {
-            endereco.setAtivo(true);
-        } else {
-            endereco.setAtivo(dto.getAtivo());
-        }
+        endereco.setAtivo(dto.getAtivo());
 
         endereco.setBairro(dto.getBairro());
         endereco.setLogradouro(dto.getLogradouro());
