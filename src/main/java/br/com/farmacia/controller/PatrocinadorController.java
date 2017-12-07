@@ -1,9 +1,9 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.builder.PatrocinadorBuild;
+import br.com.farmacia.builder.cadastro.FormPatrocinadorBuildCompleto;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
-import br.com.farmacia.dto.PatrocinadorDTO;
+import br.com.farmacia.dto.FormCompletoDTO;
 import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.PatrocinadorRepository;
@@ -22,7 +22,7 @@ import java.util.List;
 public class PatrocinadorController extends AbstractRestController{
 
     @Autowired private PatrocinadorRepository repository;
-    @Autowired private PatrocinadorBuild build;
+    @Autowired private FormPatrocinadorBuildCompleto build;
     @Autowired private Security security;
 
     @GetMapping
@@ -31,9 +31,9 @@ public class PatrocinadorController extends AbstractRestController{
     }
 
     @PostMapping
-    public ResponseEntity<Patrocinador> cadastrar(@RequestBody PatrocinadorDTO dto) {
+    public ResponseEntity<?> cadastrar(@RequestBody FormCompletoDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
-        repository.save(this.build.build(new Patrocinador(), dto));
+        build.build(dto);
         return ResponseRest.created("Patrocinador cadastrado com sucesso!");
     }
 
@@ -44,11 +44,11 @@ public class PatrocinadorController extends AbstractRestController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Patrocinador> alterar(@PathVariable("id") Patrocinador entity, @RequestBody PatrocinadorDTO dto) {
+    public ResponseEntity<?> alterar(@PathVariable("id") Patrocinador entity, @RequestBody FormCompletoDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Patrocinador não encontrado.");
-        repository.save(this.build.build(new Patrocinador(), dto));
-        return ResponseRest.ok("Calendario alterado com sucesso!");
+        build.build(dto);
+        return ResponseRest.ok("Patrocinador alterado com sucesso!");
     }
 
     @DeleteMapping("/{id}")

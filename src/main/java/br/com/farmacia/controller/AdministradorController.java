@@ -42,7 +42,12 @@ public class AdministradorController extends AbstractRestController{
     @GetMapping("/cadastroInicial/{senha}")
     public ResponseEntity<Administrador> cadastroInicial(@PathVariable("senha") Integer senha) {
         Assert.isTrue(senha.equals(2000), "Acesso negado!");
-        return ResponseRest.ok(service.cadastrarAdmInicial(new Administrador()));
+        Administrador administrador = repository.findTopByNomeAndSobrenome("Thiago", "Ferrarezi");
+       if (administrador != null) {
+           return ResponseRest.ok("ADM já cadastrado");
+       } else {
+           return ResponseRest.ok(service.cadastrarAdmInicial(new Administrador()));
+       }
     }
 
     @PostMapping
@@ -63,7 +68,7 @@ public class AdministradorController extends AbstractRestController{
     public ResponseEntity<Administrador> alterar(@PathVariable("id") Administrador entity, @RequestBody AdministradorDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Endereço não encontrado.");
-        repository.save(this.build.build(new Administrador(), dto));
+        repository.save(this.build.build(entity, dto));
         return ResponseRest.ok("Administrador alterado com sucesso!");
     }
 

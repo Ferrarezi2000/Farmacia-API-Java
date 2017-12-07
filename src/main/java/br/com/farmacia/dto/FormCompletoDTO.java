@@ -1,6 +1,5 @@
 package br.com.farmacia.dto;
 
-import br.com.farmacia.anotacao.Boleano;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,28 +11,37 @@ import java.math.BigDecimal;
 public class FormCompletoDTO implements Serializable {
 
 //    Farmácia
-    private Long administradorId;
-    private String nome;
-    private String localidade;
-    private Boolean ativo;
-    private Boolean vip;
-    private BigDecimal valorMensal;
+    private Long farmaciaId;
+    private Long farmaciaAdministradorId;
+    private String farmaciaNome;
+    private String farmaciaLocalidade;
     private Boolean farmaciaAtivo;
+    private Boolean farmaciaVip;
+    private BigDecimal farmaciaValorMensal;
 
     private String administradorToken;
     private String administradorSobrenome;
 
-//    Endereço
-    private String logradouro;
-    private String bairro;
-    private String numero;
-    private Long farmaciaId;
+//    Patrocinador
     private Long patrocinadorId;
+    private Long patrocinadorAdministradorId;
+    private String patrocinadorNome;
+    private Boolean patrocinadorAtivo;
+    private BigDecimal patrocinadorValorMensal;
+//    Endereço
+
+    private Long enderecoId;
+    private String enderecoLogradouro;
+    private String enderecoBairro;
+    private String enderecoNumero;
+    private Long enderecoFarmaciaId;
+    private Long enderecoPatrocinadorId;
     private Boolean enderecoAtivo;
 
 //    Contato
-    private String tipo;
-    private String texto;
+    private Long contatoId;
+    private String contatoTipo;
+    private String contatoTexto;
     private Boolean contatoAtivo;
 
 }

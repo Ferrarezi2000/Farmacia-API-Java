@@ -5,10 +5,8 @@ import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.BuscarPlantoesDTO;
 import br.com.farmacia.dto.PlantaoDTO;
-import br.com.farmacia.model.Calendario;
 import br.com.farmacia.model.Plantao;
 import br.com.farmacia.model.ResponseRest;
-import br.com.farmacia.repository.CalendarioRepository;
 import br.com.farmacia.repository.PlantaoRepository;
 import br.com.farmacia.service.PlantaoService;
 import io.swagger.annotations.Api;
@@ -26,7 +24,6 @@ import java.util.List;
 public class PlantaoController extends AbstractRestController{
 
     @Autowired private PlantaoRepository repository;
-    @Autowired private CalendarioRepository calendarioRepository;
     @Autowired private PlantaoBuild build;
     @Autowired private PlantaoService plantaoService;
     @Autowired private Security security;
@@ -57,8 +54,8 @@ public class PlantaoController extends AbstractRestController{
         return ResponseRest.ok("Plantao alterado com sucesso!");
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Plantao> deletar(@PathVariable("id") Plantao entity, @RequestBody AdministradorDTO dto) {
+    @PostMapping("/deletar/{id}")
+    public ResponseEntity<?> deletar(@PathVariable("id") Plantao entity, @RequestBody AdministradorDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         Assert.notNull(entity, "Plantao não encontrado.");
         repository.delete(entity);
@@ -66,11 +63,14 @@ public class PlantaoController extends AbstractRestController{
     }
 
 
-    @PostMapping("/plantoes")
+    @GetMapping("/plantoes/{mes}")
+    public ResponseEntity<?> plantoes(@PathVariable("mes") String mes) {
+        return ResponseRest.list(plantaoService.plantoesMes(mes));
+    }
+
+    @PostMapping("/plantoes/dia")
     public ResponseEntity<?> plantoes(@RequestBody BuscarPlantoesDTO dto) {
-        Calendario calendario = calendarioRepository.findTopByDiaAndMes(dto.getDia(), dto.getMes());
-        Assert.notNull(calendario, "Plantão ainda não cadastrado");
-        return ResponseRest.list(plantaoService.plantoes(calendario));
+        return ResponseRest.list(plantaoService.plantaosDia(dto));
     }
 
 }

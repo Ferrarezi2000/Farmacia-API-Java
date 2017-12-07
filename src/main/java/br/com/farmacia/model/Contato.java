@@ -26,10 +26,13 @@ public class Contato implements Serializable {
     @NotEmpty
     private String texto;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
     private Farmacia farmacia;
+
+    @ManyToOne
+    @JoinColumn(name = "id_patrocinador")
+    private Patrocinador patrocinador;
 
     private Boolean ativo;
 

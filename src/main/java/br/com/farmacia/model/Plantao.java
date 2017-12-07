@@ -3,10 +3,12 @@ package br.com.farmacia.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -25,9 +27,16 @@ public class Plantao implements Serializable {
     private Farmacia farmacia;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "id_calendario")
-    private Calendario calendario;
+    private Integer dia;
+
+    @NotEmpty
+    private String mes;
+
+    @NotNull
+    private Integer ano;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data;
 
     @Transient private Endereco endereco;
 
