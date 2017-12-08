@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface PropagandaRepository extends JpaRepository<Propaganda, Long> {
 
-    List<Propaganda> findAllByDiaSemana(String diaSemana);
 }

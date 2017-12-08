@@ -5,6 +5,7 @@ import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.model.Administrador;
 import br.com.farmacia.model.Farmacia;
+import br.com.farmacia.model.MapBuilder;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.AdministradorRepository;
 import br.com.farmacia.service.AdministradorService;
@@ -15,6 +16,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -53,8 +55,7 @@ public class AdministradorController extends AbstractRestController{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Administrador> buscar(@PathVariable("id") Administrador entity) {
-        security.check(entity.getSobrenome(), entity.getToken());
+    public ResponseEntity<?> buscar(@PathVariable("id") Administrador entity) {
         Assert.notNull(entity, "Administrador não encontrado.");
         service.setarFarmaciaPatrocinador(entity);
         return ResponseRest.object(entity);

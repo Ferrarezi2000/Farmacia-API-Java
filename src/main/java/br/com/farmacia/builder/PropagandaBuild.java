@@ -27,7 +27,11 @@ public class PropagandaBuild {
             propaganda.setPatrocinador(patrocinador);
         }
 
-        propaganda.setDiaSemana(dto.getDiaSemana());
+        propaganda.setSegunda(dto.getSegunda());
+        propaganda.setTerca(dto.getTerca());
+        propaganda.setQuarta(dto.getQuarta());
+        propaganda.setQuinta(dto.getQuinta());
+        propaganda.setSexta(dto.getSexta());
         propagandaRepository.save(propaganda);
 
         return propaganda;

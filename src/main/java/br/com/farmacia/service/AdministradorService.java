@@ -41,13 +41,19 @@ public class AdministradorService {
 
     public void setarFarmaciaPatrocinador(Administrador administrador) {
        List<Farmacia> farmacias = farmaciaRepository.findAllByAdministrador(administrador);
-       Double somaTotalFarmacia = farmacias.stream().mapToDouble(f -> f.getValorMensal().doubleValue()).sum();
-       administrador.setFarmacias(farmacias);
-       administrador.setTotalValorFarmacia(somaTotalFarmacia);
+        if (farmacias.size() != 0) {
+            farmacias.forEach(farmacia -> farmacia.setAdministrador(null));
+            Double somaTotalFarmacia = farmacias.stream().mapToDouble(f -> f.getValorMensal().doubleValue()).sum();
+            administrador.setFarmacias(farmacias);
+            administrador.setTotalValorFarmacia(somaTotalFarmacia);
+        }
 
-       List<Patrocinador> patrocinadores = patrocinadorRepository.findAllByAdministrador(administrador);
-       Double somaTotalPatrocinador = patrocinadores.stream().mapToDouble(p -> p.getValorMensal().doubleValue()).sum();
-       administrador.setPatrocinadores(patrocinadores);
-       administrador.setTotalValorPatrocinador(somaTotalPatrocinador);
+        List<Patrocinador> patrocinadores = patrocinadorRepository.findAllByAdministrador(administrador);
+        if (patrocinadores.size() != 0) {
+            patrocinadores.forEach(patrocinador -> patrocinador.setAdministrador(null));
+            Double somaTotalPatrocinador = patrocinadores.stream().mapToDouble(p -> p.getValorMensal().doubleValue()).sum();
+            administrador.setPatrocinadores(patrocinadores);
+            administrador.setTotalValorPatrocinador(somaTotalPatrocinador);
+        }
     }
 }

@@ -27,7 +27,10 @@ public class Propaganda implements Serializable {
     @JoinColumn(name = "id_patrocinador")
     private Patrocinador patrocinador;
 
-    @NotEmpty
-    private String diaSemana;
+    private Boolean segunda;
+    private Boolean terca;
+    private Boolean quarta;
+    private Boolean quinta;
+    private Boolean sexta;
 
 }
