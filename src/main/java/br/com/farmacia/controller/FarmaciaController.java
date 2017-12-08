@@ -1,6 +1,5 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.builder.alterar.FarmaciaBuild;
 import br.com.farmacia.builder.cadastro.FormFarmaciaBuildCompleto;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
@@ -26,7 +25,6 @@ public class FarmaciaController extends AbstractRestController{
     @Autowired private FarmaciaRepository repository;
     @Autowired private FormFarmaciaBuildCompleto farmaciaBuildCadastro;
     @Autowired private FarmaciaService service;
-    @Autowired private FarmaciaBuild build;
     @Autowired private Security security;
 
     @GetMapping

@@ -1,9 +1,7 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.builder.alterar.EnderecoBuild;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
-import br.com.farmacia.dto.EnderecoDTO;
 import br.com.farmacia.model.Endereco;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.EnderecoRepository;
@@ -22,7 +20,6 @@ import java.util.List;
 public class EnderecoController extends AbstractRestController{
 
     @Autowired private EnderecoRepository repository;
-    @Autowired private EnderecoBuild build;
     @Autowired private Security security;
 
     @GetMapping
@@ -30,25 +27,10 @@ public class EnderecoController extends AbstractRestController{
         return ResponseRest.list(repository.findAll());
     }
 
-    @PostMapping
-    public ResponseEntity<Endereco> cadastrar(@RequestBody EnderecoDTO dto) {
-        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
-        repository.save(this.build.build(new Endereco(), dto));
-        return ResponseRest.created("Endereço cadastrado com sucesso!");
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Endereco> buscar(@PathVariable("id") Endereco entity) {
         Assert.notNull(entity, "Endereco não encontrado.");
         return ResponseRest.object(entity);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Endereco> alterar(@PathVariable("id") Endereco entity, @RequestBody EnderecoDTO dto) {
-        security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
-        Assert.notNull(entity, "Endereço não encontrado.");
-        repository.save(this.build.build(new Endereco(), dto));
-        return ResponseRest.ok("Endereço alterado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
