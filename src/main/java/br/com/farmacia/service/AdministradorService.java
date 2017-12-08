@@ -1,10 +1,15 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.model.Administrador;
+import br.com.farmacia.model.Farmacia;
+import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.repository.AdministradorRepository;
+import br.com.farmacia.repository.FarmaciaRepository;
+import br.com.farmacia.repository.PatrocinadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,11 +17,13 @@ import java.util.UUID;
 public class AdministradorService {
 
     @Autowired private AdministradorRepository repository;
+    @Autowired private FarmaciaRepository farmaciaRepository;
+    @Autowired private PatrocinadorRepository patrocinadorRepository;
 
     public String cadastrarAdmInicial(Administrador administrador) {
-        List<Administrador> administradores = repository.findAll();
+        Administrador administradorcheck = repository.findTopByNomeAndSobrenome("Thiago", "Ferrarezi");
 
-        if (administradores.size() == 0) {
+        if (administradorcheck == null) {
             administrador.setAtivo(true);
             administrador.setNome("Thiago");
             administrador.setSobrenome("Ferrarezi");
@@ -30,5 +37,17 @@ public class AdministradorService {
         } else {
             return "Falha... Administrador já cadastrado...";
         }
+    }
+
+    public void setarFarmaciaPatrocinador(Administrador administrador) {
+       List<Farmacia> farmacias = farmaciaRepository.findAllByAdministrador(administrador);
+       Double somaTotalFarmacia = farmacias.stream().mapToDouble(f -> f.getValorMensal().doubleValue()).sum();
+       administrador.setFarmacias(farmacias);
+       administrador.setTotalValorFarmacia(somaTotalFarmacia);
+
+       List<Patrocinador> patrocinadores = patrocinadorRepository.findAllByAdministrador(administrador);
+       Double somaTotalPatrocinador = patrocinadores.stream().mapToDouble(p -> p.getValorMensal().doubleValue()).sum();
+       administrador.setPatrocinadores(patrocinadores);
+       administrador.setTotalValorPatrocinador(somaTotalPatrocinador);
     }
 }

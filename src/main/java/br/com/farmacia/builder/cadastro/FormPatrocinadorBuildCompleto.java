@@ -18,7 +18,7 @@ public class FormPatrocinadorBuildCompleto {
         Patrocinador patrocinador = new Patrocinador();
         if (dto.getPatrocinadorId() != null) {
             patrocinador = patrocinadorRepository.findOne(dto.getPatrocinadorId());
-            patrocinador.setId(dto.getFarmaciaId());
+            patrocinador.setId(dto.getPatrocinadorId());
         }
         if (dto.getPatrocinadorAdministradorId() != null) {
             Administrador administrador = administradorRepository.findOne(dto.getPatrocinadorAdministradorId());
