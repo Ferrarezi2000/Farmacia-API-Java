@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ContatoRepository extends JpaRepository<Contato, Long> {
 
-    Contato findTopByFarmacia(Farmacia farmacia);
     Contato findTopByPatrocinador(Patrocinador patrocinador);
     List<Contato> findAllByFarmacia(Farmacia farmacia);
+    List<Contato> findAllByPatrocinador(Patrocinador patrocinador);
 }

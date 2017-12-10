@@ -30,8 +30,8 @@ public class FormCompletoDTO implements Serializable {
     private String patrocinadorNome;
     private Boolean patrocinadorAtivo;
     private BigDecimal patrocinadorValorMensal;
-//    Endereço
 
+//    Endereço
     private Long enderecoId;
     private String enderecoLogradouro;
     private String enderecoBairro;

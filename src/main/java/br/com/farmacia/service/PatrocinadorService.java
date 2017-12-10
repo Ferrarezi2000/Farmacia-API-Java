@@ -10,6 +10,8 @@ import br.com.farmacia.repository.PatrocinadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PatrocinadorService {
 
@@ -36,11 +38,12 @@ public class PatrocinadorService {
         completoDTO.setEnderecoLogradouro(endereco.getLogradouro());
         completoDTO.setEnderecoNumero(endereco.getNumero());
 
-        Contato contato = contatoRepository.findTopByPatrocinador(patrocinador);
-        completoDTO.setContatoId(contato.getId());
-        completoDTO.setContatoAtivo(contato.getAtivo());
-        completoDTO.setContatoTexto(contato.getTexto());
-        completoDTO.setContatoTipo(contato.getTipo());
+        List<Contato> contatos = contatoRepository.findAllByPatrocinador(patrocinador);
+        contatos.forEach(contato -> {
+            contato.setPatrocinador(null);
+            contato.setFarmacia(null);
+        });
+        completoDTO.setContatos(contatos);
 
         return completoDTO;
     }
