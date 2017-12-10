@@ -38,7 +38,4 @@ public class Plantao implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
 
-    @Transient private Endereco endereco;
-
-
 }

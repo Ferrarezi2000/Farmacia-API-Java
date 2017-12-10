@@ -6,8 +6,11 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +29,9 @@ public class Farmacia implements Serializable {
     @NotEmpty
     private String localidade;
 
+    @NotNull
+    private Integer codigo;
+
     private Boolean ativo;
 
     private Boolean vip;
@@ -35,5 +41,10 @@ public class Farmacia implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;
+
+    @Transient
+    private List<Contato> contatos = new ArrayList<>();
+    @Transient
+    private Endereco endereco;
 
 }

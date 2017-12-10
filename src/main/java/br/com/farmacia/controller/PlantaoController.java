@@ -70,7 +70,7 @@ public class PlantaoController extends AbstractRestController{
 
     @PostMapping("/plantoes/dia")
     public ResponseEntity<?> plantoes(@RequestBody BuscarPlantoesDTO dto) {
-        return ResponseRest.list(plantaoService.plantaosDia(dto));
+        return ResponseRest.object(plantaoService.plantaosDia(dto));
     }
 
 }

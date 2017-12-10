@@ -14,6 +14,7 @@ public class FarmaciaDTO implements Serializable {
     private Long administradorId;
     private String nome;
     private String localidade;
+    private Integer codigo;
     private Boolean ativo;
     private Boolean vip;
     private BigDecimal valorMensal;

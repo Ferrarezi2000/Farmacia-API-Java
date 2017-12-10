@@ -1,23 +1,21 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.dto.BuscarPlantoesDTO;
-import br.com.farmacia.model.Endereco;
-import br.com.farmacia.model.Plantao;
+import br.com.farmacia.model.*;
+import br.com.farmacia.repository.ContatoRepository;
 import br.com.farmacia.repository.EnderecoRepository;
 import br.com.farmacia.repository.PlantaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PlantaoService {
 
     @Autowired private PlantaoRepository repository;
     @Autowired private EnderecoRepository enderecoRepository;
+    @Autowired private ContatoRepository contatoRepository;
 
     public List<Plantao> plantoesMes(String mes){
 
@@ -71,13 +69,23 @@ public class PlantaoService {
                 break;
         }
 
+
+
         List<Plantao> plantoes = repository.findAllByDiaAndMesAndAno(dataCal.get(Calendar.DATE),
                 dto.getMes(), dataCal.get(Calendar.YEAR));
+
+
         plantoes.forEach(p -> {
+            List<Contato> contatos = contatoRepository.findAllByFarmacia(p.getFarmacia());
+            contatos.forEach(contato -> contato.setFarmacia(null));
+            p.getFarmacia().setContatos(contatos);
+
             Endereco endereco = enderecoRepository.findTopByFarmacia(p.getFarmacia());
             endereco.setFarmacia(null);
-            p.setEndereco(endereco);
+            p.getFarmacia().setEndereco(endereco);
+
         });
+
         return plantoes;
     }
 }
