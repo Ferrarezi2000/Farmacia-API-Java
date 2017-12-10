@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 public class FarmaciaService {
@@ -38,11 +39,19 @@ public class FarmaciaService {
         completoDTO.setEnderecoLogradouro(endereco.getLogradouro());
         completoDTO.setEnderecoNumero(endereco.getNumero());
 
-        Contato contato = contatoRepository.findTopByFarmacia(farmacia);
-        completoDTO.setContatoId(contato.getId());
-        completoDTO.setContatoAtivo(contato.getAtivo());
-        completoDTO.setContatoTexto(contato.getTexto());
-        completoDTO.setContatoTipo(contato.getTipo());
+
+        List<Contato> contatos = contatoRepository.findAllByFarmacia(farmacia);
+        contatos.forEach(contato -> {
+            contato.setFarmacia(null);
+            contato.setPatrocinador(null);
+        });
+        completoDTO.setContatos(contatos);
+
+//        Contato contato = contatoRepository.findTopByFarmacia(farmacia);
+//        completoDTO.setContatoId(contato.getId());
+//        completoDTO.setContatoAtivo(contato.getAtivo());
+//        completoDTO.setContatoTexto(contato.getTexto());
+//        completoDTO.setContatoTipo(contato.getTipo());
 
         return completoDTO;
     }

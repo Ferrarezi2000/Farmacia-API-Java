@@ -1,10 +1,12 @@
 package br.com.farmacia.dto;
 
+import br.com.farmacia.model.Contato;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,5 +45,6 @@ public class FormCompletoDTO implements Serializable {
     private String contatoTipo;
     private String contatoTexto;
     private Boolean contatoAtivo;
+    private List<Contato> contatos;
 
 }

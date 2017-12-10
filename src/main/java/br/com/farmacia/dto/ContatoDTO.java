@@ -13,6 +13,7 @@ public class ContatoDTO implements Serializable {
     private String tipo;
     private String texto;
     private Long farmaciaId;
+    private Long patrocinadorId;
     private Boolean ativo;
 
     private String administradorToken;
