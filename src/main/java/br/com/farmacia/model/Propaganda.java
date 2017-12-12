@@ -32,5 +32,7 @@ public class Propaganda implements Serializable {
     private Boolean quarta;
     private Boolean quinta;
     private Boolean sexta;
+    private Boolean sabado;
+    private Boolean domingo;
 
 }

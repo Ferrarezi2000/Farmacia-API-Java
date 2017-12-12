@@ -32,6 +32,8 @@ public class PropagandaBuild {
         propaganda.setQuarta(dto.getQuarta());
         propaganda.setQuinta(dto.getQuinta());
         propaganda.setSexta(dto.getSexta());
+        propaganda.setSabado(dto.getSabado());
+        propaganda.setDomingo(dto.getDomingo());
         propagandaRepository.save(propaganda);
 
         return propaganda;

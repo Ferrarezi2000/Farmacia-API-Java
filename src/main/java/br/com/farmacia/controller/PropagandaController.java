@@ -1,17 +1,14 @@
 package br.com.farmacia.controller;
 
+import br.com.farmacia.anotacao.Boleano;
 import br.com.farmacia.builder.PropagandaBuild;
-import br.com.farmacia.builder.cadastro.FormPatrocinadorBuildCompleto;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
-import br.com.farmacia.dto.FormCompletoDTO;
+import br.com.farmacia.dto.DiasDTO;
 import br.com.farmacia.dto.PropagandaDTO;
-import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.model.Propaganda;
 import br.com.farmacia.model.ResponseRest;
-import br.com.farmacia.repository.PatrocinadorRepository;
 import br.com.farmacia.repository.PropagandaRepository;
-import br.com.farmacia.service.PatrocinadorService;
 import br.com.farmacia.service.PropagandaService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,8 +26,8 @@ import java.util.List;
 public class PropagandaController extends AbstractRestController{
 
     @Autowired private PropagandaRepository repository;
-    @Autowired private PropagandaBuild build;
     @Autowired private PropagandaService propagandaService;
+    @Autowired private PropagandaBuild build;
     @Autowired private Security security;
 
     @GetMapping
@@ -64,6 +62,11 @@ public class PropagandaController extends AbstractRestController{
         Assert.notNull(entity, "Propaganda não encontrado.");
         repository.delete(entity);
         return ResponseRest.ok("Propaganda excluído com suecesso.");
+    }
+
+    @PostMapping("/dias")
+    public ResponseEntity<?> porDia(@RequestBody DiasDTO dto) {
+        return ResponseRest.object( propagandaService.retornarPropagandaDia(dto));
     }
 
 }

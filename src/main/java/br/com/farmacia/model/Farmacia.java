@@ -30,7 +30,7 @@ public class Farmacia implements Serializable {
     private String localidade;
 
     @NotNull
-    private Integer codigo;
+    private String codigoImagem;
 
     private Boolean ativo;
 

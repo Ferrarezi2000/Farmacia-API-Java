@@ -3,15 +3,10 @@ package br.com.farmacia.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Getter
 @Setter
-public class PropagandaDTO implements Serializable {
+public class DiasDTO {
 
-    private Long id;
-    private Long farmaciaId;
-    private Long patrocinadorId;
     private Boolean segunda;
     private Boolean terca;
     private Boolean quarta;
@@ -19,8 +14,4 @@ public class PropagandaDTO implements Serializable {
     private Boolean sexta;
     private Boolean sabado;
     private Boolean domingo;
-
-    private String administradorToken;
-    private String administradorSobrenome;
-
 }
