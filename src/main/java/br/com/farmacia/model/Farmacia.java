@@ -43,7 +43,7 @@ public class Farmacia implements Serializable {
     private Administrador administrador;
 
     @Transient
-    private List<Contato> contatos = new ArrayList<>();
+    private List<Contato> contatos;
     @Transient
     private Endereco endereco;
 

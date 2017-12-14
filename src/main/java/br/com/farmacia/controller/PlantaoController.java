@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -63,13 +64,18 @@ public class PlantaoController extends AbstractRestController{
     }
 
 
-    @GetMapping("/plantoes/{mes}")
-    public ResponseEntity<?> plantoes(@PathVariable("mes") String mes) {
-        return ResponseRest.list(plantaoService.plantoesMes(mes));
+//    @GetMapping("/plantoes/{mes}")
+//    public ResponseEntity<?> plantoes(@PathVariable("mes") String mes) {
+//        return ResponseRest.list(plantaoService.plantoesMes(mes));
+//    }
+
+    @PostMapping("/plantoes/mes")
+    public ResponseEntity<?> plantoesMes(@RequestBody BuscarPlantoesDTO dto) {
+        return ResponseRest.list(plantaoService.plantoesMes(dto));
     }
 
     @PostMapping("/plantoes/dia")
-    public ResponseEntity<?> plantoes(@RequestBody BuscarPlantoesDTO dto) {
+    public ResponseEntity<?> plantoesDia(@RequestBody BuscarPlantoesDTO dto) {
         return ResponseRest.object(plantaoService.plantaosDia(dto));
     }
 

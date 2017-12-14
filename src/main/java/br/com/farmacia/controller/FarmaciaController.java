@@ -33,8 +33,9 @@ public class FarmaciaController extends AbstractRestController{
     }
 
     @GetMapping("/vip")
-    public ResponseEntity<List<Farmacia>> vip(){
-        return ResponseRest.list(repository.findAllByVipIsTrue());
+    public ResponseEntity<?> vip(){
+        List<Farmacia> farmacias = service.addEndeContato();
+        return ResponseRest.list(farmacias);
     }
 
     @PostMapping

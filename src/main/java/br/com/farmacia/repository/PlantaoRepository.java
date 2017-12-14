@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlantaoRepository extends JpaRepository<Plantao, Long> {
 
-    List<Plantao> findAllByMesAndAno(String mes, Integer ano);
+    List<Plantao> findAllByMesAndAnoOrderByDia(String mes, Integer ano);
 
     List<Plantao> findAllByDiaAndMesAndAno(Integer dia, String mes, Integer ano);
 

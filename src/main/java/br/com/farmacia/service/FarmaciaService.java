@@ -6,6 +6,7 @@ import br.com.farmacia.model.Endereco;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.repository.ContatoRepository;
 import br.com.farmacia.repository.EnderecoRepository;
+import br.com.farmacia.repository.FarmaciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class FarmaciaService {
 
     @Autowired private EnderecoRepository enderecoRepository;
     @Autowired private ContatoRepository contatoRepository;
+    @Autowired private FarmaciaRepository farmaciaRepository;
 
     public FormCompletoDTO completo(Farmacia farmacia) {
 
@@ -47,13 +49,25 @@ public class FarmaciaService {
         });
         completoDTO.setContatos(contatos);
 
-//        Contato contato = contatoRepository.findTopByFarmacia(farmacia);
-//        completoDTO.setContatoId(contato.getId());
-//        completoDTO.setContatoAtivo(contato.getAtivo());
-//        completoDTO.setContatoTexto(contato.getTexto());
-//        completoDTO.setContatoTipo(contato.getTipo());
-
         return completoDTO;
+    }
+
+    public List<Farmacia> addEndeContato() {
+        List<Farmacia> farmacias = farmaciaRepository.findAllByVipIsTrue();
+        farmacias.forEach(farmacia -> {
+            List<Contato> contatos = contatoRepository.findAllByFarmacia(farmacia);
+            contatos.forEach(contato -> {
+                contato.setPatrocinador(null);
+                contato.setFarmacia(null);
+            });
+            farmacia.setContatos(contatos);
+
+            Endereco endereco = enderecoRepository.findTopByFarmacia(farmacia);
+            endereco.setPatrocinador(null);
+            endereco.setFarmacia(null);
+            farmacia.setEndereco(endereco);
+        });
+        return farmacias;
     }
 
 }
