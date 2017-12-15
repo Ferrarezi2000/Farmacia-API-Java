@@ -28,6 +28,9 @@ public class FormPatrocinadorBuildCompleto {
         patrocinador.setValorMensal(dto.getPatrocinadorValorMensal());
         patrocinador.setNome(dto.getPatrocinadorNome());
         patrocinador.setAtivo(dto.getPatrocinadorAtivo());
+        patrocinador.setTexto(dto.getPatrocinadorTexto());
+        patrocinador.setHoraAbrir(dto.getPatrocinadorHoraAbrir());
+        patrocinador.setHoraFechar(dto.getPatrocinadorHoraFechar());
         patrocinadorRepository.save(patrocinador);
 
 

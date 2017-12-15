@@ -29,6 +29,9 @@ public class FormFarmaciaBuildCompleto {
         farmacia.setNome(dto.getFarmaciaNome());
         farmacia.setLocalidade(dto.getFarmaciaLocalidade());
         farmacia.setVip(dto.getFarmaciaVip());
+        farmacia.setTexto(dto.getFarmaciaTexto());
+        farmacia.setHoraAbrir(dto.getFarmaciaHoraAbrir());
+        farmacia.setHoraFechar(dto.getFarmaciaHoraFechar());
         farmacia.setCodigoImagem(dto.getFarmaciaNome() + '.' + dto.getFarmaciaLocalidade());
         farmaciaRepository.save(farmacia);
 

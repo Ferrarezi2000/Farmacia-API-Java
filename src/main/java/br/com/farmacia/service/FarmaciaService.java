@@ -28,6 +28,8 @@ public class FarmaciaService {
         completoDTO.setFarmaciaLocalidade(farmacia.getLocalidade());
         completoDTO.setFarmaciaNome(farmacia.getNome());
         completoDTO.setFarmaciaValorMensal(farmacia.getValorMensal());
+        completoDTO.setFarmaciaHoraAbrir(farmacia.getHoraAbrir());
+        completoDTO.setFarmaciaHoraFechar(farmacia.getHoraFechar());
         completoDTO.setFarmaciaVip(farmacia.getVip());
         if (farmacia.getAdministrador() != null) {
             completoDTO.setFarmaciaAdministradorId(farmacia.getAdministrador().getId());

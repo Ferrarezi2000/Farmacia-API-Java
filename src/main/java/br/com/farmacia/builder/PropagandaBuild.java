@@ -34,6 +34,7 @@ public class PropagandaBuild {
         propaganda.setSexta(dto.getSexta());
         propaganda.setSabado(dto.getSabado());
         propaganda.setDomingo(dto.getDomingo());
+        propaganda.setTexo(dto.getTexto());
         propagandaRepository.save(propaganda);
 
         return propaganda;

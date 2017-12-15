@@ -19,6 +19,7 @@ public class PropagandaDTO implements Serializable {
     private Boolean sexta;
     private Boolean sabado;
     private Boolean domingo;
+    private String texto;
 
     private String administradorToken;
     private String administradorSobrenome;

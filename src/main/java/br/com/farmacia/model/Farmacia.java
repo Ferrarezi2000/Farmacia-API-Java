@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +30,14 @@ public class Farmacia implements Serializable {
 
     @NotNull
     private String codigoImagem;
+
+    @NotNull
+    private String horaAbrir;
+
+    @NotNull
+    private String horaFechar;
+
+    private String texto;
 
     private Boolean ativo;
 

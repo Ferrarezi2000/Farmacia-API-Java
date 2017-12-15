@@ -20,6 +20,9 @@ public class FormCompletoDTO implements Serializable {
     private Boolean farmaciaAtivo;
     private Boolean farmaciaVip;
     private BigDecimal farmaciaValorMensal;
+    private String farmaciaTexto;
+    private String farmaciaHoraAbrir;
+    private String farmaciaHoraFechar;
 
     private String administradorToken;
     private String administradorSobrenome;
@@ -30,6 +33,9 @@ public class FormCompletoDTO implements Serializable {
     private String patrocinadorNome;
     private Boolean patrocinadorAtivo;
     private BigDecimal patrocinadorValorMensal;
+    private String patrocinadorTexto;
+    private String patrocinadorHoraAbrir;
+    private String patrocinadorHoraFechar;
 
 //    Endereço
     private Long enderecoId;

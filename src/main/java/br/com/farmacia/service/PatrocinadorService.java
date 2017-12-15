@@ -25,6 +25,9 @@ public class PatrocinadorService {
         completoDTO.setPatrocinadorId(patrocinador.getId());
         completoDTO.setPatrocinadorAtivo(patrocinador.getAtivo());
         completoDTO.setPatrocinadorNome(patrocinador.getNome());
+        completoDTO.setPatrocinadorHoraAbrir(patrocinador.getHoraAbrir());
+        completoDTO.setPatrocinadorHoraFechar(patrocinador.getHoraFechar());
+        completoDTO.setPatrocinadorTexto(patrocinador.getTexto());
         completoDTO.setPatrocinadorValorMensal(patrocinador.getValorMensal());
         if (patrocinador.getAdministrador() != null) {
             completoDTO.setPatrocinadorAdministradorId(patrocinador.getAdministrador().getId());
@@ -46,6 +49,27 @@ public class PatrocinadorService {
         completoDTO.setContatos(contatos);
 
         return completoDTO;
+    }
+
+    public List<Patrocinador> findAll(){
+        List<Patrocinador> patrocinadores = repository.findAllByAtivoIsTrue();
+        patrocinadores.forEach(patrocinador -> {
+            Endereco endereco = enderecoRepository.findTopByPatrocinador(patrocinador);
+            endereco.setPatrocinador(null);
+            endereco.setFarmacia(null);
+            patrocinador.setEndereco(endereco);
+
+            List<Contato> contatos = contatoRepository.findAllByPatrocinador(patrocinador);
+            contatos.forEach(contato -> {
+                contato.setPatrocinador(null);
+                contato.setFarmacia(null);
+            });
+            patrocinador.setContatos(contatos);
+            patrocinador.setAdministrador(null);
+
+        });
+
+        return patrocinadores;
     }
 
 }

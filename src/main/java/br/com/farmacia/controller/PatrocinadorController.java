@@ -29,7 +29,7 @@ public class PatrocinadorController extends AbstractRestController{
 
     @GetMapping
     public ResponseEntity<List<Patrocinador>> listar() {
-        return ResponseRest.list(repository.findAllByAtivoIsTrue());
+        return ResponseRest.list(patrocinadorService.findAll());
     }
 
     @PostMapping

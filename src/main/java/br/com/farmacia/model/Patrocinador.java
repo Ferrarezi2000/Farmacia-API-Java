@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,8 +30,23 @@ public class Patrocinador implements Serializable {
     @NotNull
     private BigDecimal valorMensal;
 
+    @NotNull
+    private String horaAbrir;
+
+    @NotNull
+    private String horaFechar;
+
+    @NotEmpty
+    private String texto;
+
     @ManyToOne
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;
+
+    @Transient
+    private Endereco endereco;
+
+    @Transient
+    private List<Contato> contatos;
 
 }
