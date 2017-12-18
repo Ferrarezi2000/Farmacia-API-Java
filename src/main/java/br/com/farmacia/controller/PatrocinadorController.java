@@ -54,6 +54,13 @@ public class PatrocinadorController extends AbstractRestController{
         return ResponseRest.ok("Patrocinador alterado com sucesso!");
     }
 
+    @GetMapping("/setarAcesso/{id}")
+    public ResponseEntity<?> setarAvesso(@PathVariable("id") Patrocinador entity) {
+        Assert.notNull(entity, "Patrocinador não encontrada.");
+        patrocinadorService.setarAcesso(entity);
+        return ResponseRest.ok("Acesso contabilizado...");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Patrocinador> deletar(@PathVariable("id") Patrocinador entity, @RequestBody AdministradorDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());

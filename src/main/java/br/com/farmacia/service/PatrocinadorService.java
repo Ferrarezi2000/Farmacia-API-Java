@@ -51,6 +51,11 @@ public class PatrocinadorService {
         return completoDTO;
     }
 
+    public void setarAcesso(Patrocinador patrocinador) {
+        patrocinador.setAcesso(patrocinador.getAcesso() + 1);
+        repository.save(patrocinador);
+    }
+
     public List<Patrocinador> findAll(){
         List<Patrocinador> patrocinadores = repository.findAllByAtivoIsTrue();
         patrocinadores.forEach(patrocinador -> {

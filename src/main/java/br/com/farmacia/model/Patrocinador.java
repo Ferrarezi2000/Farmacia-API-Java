@@ -39,6 +39,10 @@ public class Patrocinador implements Serializable {
     @NotEmpty
     private String texto;
 
+    private Integer avaliacao;
+
+    private Integer acesso;
+
     @ManyToOne
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;

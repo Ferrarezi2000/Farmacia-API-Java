@@ -60,6 +60,13 @@ public class FarmaciaController extends AbstractRestController{
         return ResponseRest.ok("Farmácia alterada com sucesso!");
     }
 
+    @GetMapping("/setarAcesso/{id}")
+    public ResponseEntity<?> setarAvesso(@PathVariable("id") Farmacia entity) {
+        Assert.notNull(entity, "Farmácia não encontrada.");
+        service.setarAcesso(entity);
+        return ResponseRest.ok("Acesso contabilizado...");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Farmacia> deletar(@PathVariable("id") Farmacia entity, @RequestBody AdministradorDTO dto) {
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());

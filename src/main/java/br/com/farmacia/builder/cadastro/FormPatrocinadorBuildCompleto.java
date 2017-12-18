@@ -31,6 +31,12 @@ public class FormPatrocinadorBuildCompleto {
         patrocinador.setTexto(dto.getPatrocinadorTexto());
         patrocinador.setHoraAbrir(dto.getPatrocinadorHoraAbrir());
         patrocinador.setHoraFechar(dto.getPatrocinadorHoraFechar());
+        if (patrocinador.getId() == null) {
+            patrocinador.setAcesso(0);
+        } else {
+            patrocinador.setAcesso(dto.getPatrocinadorAcesso());
+        }
+        patrocinador.setAvaliacao(dto.getPatrocinadorAvaliacao());
         patrocinadorRepository.save(patrocinador);
 
 

@@ -45,6 +45,10 @@ public class Farmacia implements Serializable {
 
     private BigDecimal valorMensal;
 
+    private Integer avaliacao;
+
+    private Integer acesso;
+
     @ManyToOne
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;

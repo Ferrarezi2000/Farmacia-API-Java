@@ -10,7 +10,6 @@ import br.com.farmacia.repository.FarmaciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -31,6 +30,7 @@ public class FarmaciaService {
         completoDTO.setFarmaciaHoraAbrir(farmacia.getHoraAbrir());
         completoDTO.setFarmaciaHoraFechar(farmacia.getHoraFechar());
         completoDTO.setFarmaciaVip(farmacia.getVip());
+        completoDTO.setFarmaciaTexto(farmacia.getTexto());
         if (farmacia.getAdministrador() != null) {
             completoDTO.setFarmaciaAdministradorId(farmacia.getAdministrador().getId());
         }
@@ -52,6 +52,11 @@ public class FarmaciaService {
         completoDTO.setContatos(contatos);
 
         return completoDTO;
+    }
+
+    public void setarAcesso(Farmacia farmacia) {
+        farmacia.setAcesso(farmacia.getAcesso() + 1);
+        farmaciaRepository.save(farmacia);
     }
 
     public List<Farmacia> addEndeContato() {
