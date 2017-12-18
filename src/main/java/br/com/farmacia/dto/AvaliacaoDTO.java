@@ -15,5 +15,6 @@ public class AvaliacaoDTO implements Serializable {
     private Long farmaciaId;
     private Long patrocinadorId;
     private Integer valor;
+    private String comentario;
 
 }

@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -37,4 +38,7 @@ public class Avaliacao implements Serializable {
     @NotNull
     private Integer valor;
 
+    private String comentario;
+
+    private Date momento;
 }

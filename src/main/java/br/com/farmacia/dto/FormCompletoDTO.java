@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -36,6 +37,7 @@ public class FormCompletoDTO implements Serializable {
     private Integer farmaciaTotalAvaliacoes3;
     private Integer farmaciaTotalAvaliacoes2;
     private Integer farmaciaTotalAvaliacoes1;
+    private Date farmaciaAvaliacaoMomento;
 
 //    Patrocinador
     private Long patrocinadorId;
