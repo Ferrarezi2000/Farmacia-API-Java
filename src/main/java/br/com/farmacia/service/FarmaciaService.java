@@ -1,9 +1,11 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.dto.FormCompletoDTO;
+import br.com.farmacia.model.Avaliacao;
 import br.com.farmacia.model.Contato;
 import br.com.farmacia.model.Endereco;
 import br.com.farmacia.model.Farmacia;
+import br.com.farmacia.repository.AvaliacaoRepository;
 import br.com.farmacia.repository.ContatoRepository;
 import br.com.farmacia.repository.EnderecoRepository;
 import br.com.farmacia.repository.FarmaciaRepository;
@@ -18,10 +20,23 @@ public class FarmaciaService {
     @Autowired private EnderecoRepository enderecoRepository;
     @Autowired private ContatoRepository contatoRepository;
     @Autowired private FarmaciaRepository farmaciaRepository;
+    @Autowired private AvaliacaoRepository avaliacaoRepository;
+
+    public List<Farmacia> findAllMedia() {
+        List<Farmacia> farmacias = farmaciaRepository.findAll();
+        farmacias.forEach(farmacia -> {
+            List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByFarmaciaOrderByValorDesc(farmacia);
+            Double totalSoma = avaliacoes.stream().mapToDouble(a -> a.getValor()).sum();
+            Double media = totalSoma / avaliacoes.size();
+            farmacia.setMedia(Math.round(media / 0.5) * 0.5);
+        });
+        return farmacias;
+    }
 
     public FormCompletoDTO completo(Farmacia farmacia) {
 
         FormCompletoDTO completoDTO = new FormCompletoDTO();
+        completoDTO.setFarmaciaId(farmacia.getId());
         completoDTO.setFarmaciaId(farmacia.getId());
         completoDTO.setFarmaciaAtivo(farmacia.getAtivo());
         completoDTO.setFarmaciaLocalidade(farmacia.getLocalidade());
@@ -50,6 +65,23 @@ public class FarmaciaService {
             contato.setPatrocinador(null);
         });
         completoDTO.setContatos(contatos);
+
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByFarmaciaOrderByValorDesc(farmacia);
+        avaliacoes.forEach(avaliacao -> avaliacao.setFarmacia(null));
+
+
+        Double totalSoma = avaliacoes.stream().mapToDouble(a -> a.getValor()).sum();
+        completoDTO.setFarmaciaTotalAvaliacoes(avaliacoes.size());
+        Double media = totalSoma / avaliacoes.size();
+
+        completoDTO.setFarmaciaMediaAvaliacao(Math.round(media / 0.5) * 0.5);
+        completoDTO.setFarmaciaTotalAvaliacoes5(Math.toIntExact(avaliacoes.stream().filter(a -> a.getValor().equals(5)).count()));
+        completoDTO.setFarmaciaTotalAvaliacoes4(Math.toIntExact(avaliacoes.stream().filter(a -> a.getValor().equals(4)).count()));
+        completoDTO.setFarmaciaTotalAvaliacoes3(Math.toIntExact(avaliacoes.stream().filter(a -> a.getValor().equals(3)).count()));
+        completoDTO.setFarmaciaTotalAvaliacoes2(Math.toIntExact(avaliacoes.stream().filter(a -> a.getValor().equals(2)).count()));
+        completoDTO.setFarmaciaTotalAvaliacoes1(Math.toIntExact(avaliacoes.stream().filter(a -> a.getValor().equals(1)).count()));
+        completoDTO.setFarmaciaAvaliacoes(avaliacoes);
+
 
         return completoDTO;
     }

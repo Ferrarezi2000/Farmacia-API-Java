@@ -45,7 +45,7 @@ public class Farmacia implements Serializable {
 
     private BigDecimal valorMensal;
 
-    private Integer avaliacao;
+//    private Integer avaliacao;
 
     private Integer acesso;
 
@@ -57,5 +57,7 @@ public class Farmacia implements Serializable {
     private List<Contato> contatos;
     @Transient
     private Endereco endereco;
+    @Transient
+    private Double media;
 
 }

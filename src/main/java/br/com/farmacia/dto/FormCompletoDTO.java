@@ -1,5 +1,6 @@
 package br.com.farmacia.dto;
 
+import br.com.farmacia.model.Avaliacao;
 import br.com.farmacia.model.Contato;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,14 @@ public class FormCompletoDTO implements Serializable {
     private Integer farmaciaAcesso;
     private String administradorToken;
     private String administradorSobrenome;
+    private List<Avaliacao> farmaciaAvaliacoes;
+    private Double farmaciaMediaAvaliacao;
+    private Integer farmaciaTotalAvaliacoes;
+    private Integer farmaciaTotalAvaliacoes5;
+    private Integer farmaciaTotalAvaliacoes4;
+    private Integer farmaciaTotalAvaliacoes3;
+    private Integer farmaciaTotalAvaliacoes2;
+    private Integer farmaciaTotalAvaliacoes1;
 
 //    Patrocinador
     private Long patrocinadorId;
@@ -39,6 +48,8 @@ public class FormCompletoDTO implements Serializable {
     private String patrocinadorHoraFechar;
     private Integer patrocinadorAvaliacao;
     private Integer patrocinadorAcesso;
+    private List<Avaliacao> patrocinadorAvaliacoes;
+    private Double patrocinadorMediaAvaliacao;
 
 //    Endereço
     private Long enderecoId;

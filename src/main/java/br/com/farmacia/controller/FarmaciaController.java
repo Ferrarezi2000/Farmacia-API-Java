@@ -29,13 +29,20 @@ public class FarmaciaController extends AbstractRestController{
 
     @GetMapping
     public ResponseEntity<List<Farmacia>> listar() {
-        return ResponseRest.list(repository.findAll());
+        return ResponseRest.list(service.findAllMedia());
     }
 
     @GetMapping("/vip")
     public ResponseEntity<?> vip(){
         List<Farmacia> farmacias = service.addEndeContato();
         return ResponseRest.list(farmacias);
+    }
+
+    @GetMapping("/avaliacoes")
+    public ResponseEntity<?> avaliacoes(@PathVariable("id") Farmacia entity) {
+        Assert.notNull(entity, "Farmácia não encontrada.");
+        FormCompletoDTO completoDTO = service.completo(entity);
+        return ResponseRest.object(completoDTO);
     }
 
     @PostMapping

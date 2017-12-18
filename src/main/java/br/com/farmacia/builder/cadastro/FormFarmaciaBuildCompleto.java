@@ -38,7 +38,7 @@ public class FormFarmaciaBuildCompleto {
         } else {
             farmacia.setAcesso(dto.getFarmaciaAcesso());
         }
-        farmacia.setAvaliacao(dto.getFarmaciaAvaliacao());
+//        farmacia.setAvaliacao(dto.getFarmaciaAvaliacao());
         farmaciaRepository.save(farmacia);
 
 
