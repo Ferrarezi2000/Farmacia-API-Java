@@ -30,11 +30,11 @@ public class Patrocinador implements Serializable {
     @NotNull
     private BigDecimal valorMensal;
 
-    @NotNull
-    private String horaAbrir;
-
-    @NotNull
-    private String horaFechar;
+//    @NotNull
+//    private String horaAbrir;
+//
+//    @NotNull
+//    private String horaFechar;
 
     @NotEmpty
     private String texto;
@@ -43,14 +43,19 @@ public class Patrocinador implements Serializable {
 
     private Integer acesso;
 
+    private String senhaAcesso;
+
+    private String usuarioAcesso;
+
     @ManyToOne
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;
 
     @Transient
     private Endereco endereco;
-
     @Transient
     private List<Contato> contatos;
+    @Transient
+    private Double media;
 
 }

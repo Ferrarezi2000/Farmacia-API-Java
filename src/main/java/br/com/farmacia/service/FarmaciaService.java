@@ -1,14 +1,8 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.dto.FormCompletoDTO;
-import br.com.farmacia.model.Avaliacao;
-import br.com.farmacia.model.Contato;
-import br.com.farmacia.model.Endereco;
-import br.com.farmacia.model.Farmacia;
-import br.com.farmacia.repository.AvaliacaoRepository;
-import br.com.farmacia.repository.ContatoRepository;
-import br.com.farmacia.repository.EnderecoRepository;
-import br.com.farmacia.repository.FarmaciaRepository;
+import br.com.farmacia.model.*;
+import br.com.farmacia.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +15,8 @@ public class FarmaciaService {
     @Autowired private ContatoRepository contatoRepository;
     @Autowired private FarmaciaRepository farmaciaRepository;
     @Autowired private AvaliacaoRepository avaliacaoRepository;
+    @Autowired private FormaPagamentoRepository formaPagamentoRepository;
+    @Autowired private FuncionamentoRepository funcionamentoRepository;
 
     public List<Farmacia> findAllMedia() {
         List<Farmacia> farmacias = farmaciaRepository.findAll();
@@ -42,10 +38,10 @@ public class FarmaciaService {
         completoDTO.setFarmaciaLocalidade(farmacia.getLocalidade());
         completoDTO.setFarmaciaNome(farmacia.getNome());
         completoDTO.setFarmaciaValorMensal(farmacia.getValorMensal());
-        completoDTO.setFarmaciaHoraAbrir(farmacia.getHoraAbrir());
-        completoDTO.setFarmaciaHoraFechar(farmacia.getHoraFechar());
         completoDTO.setFarmaciaVip(farmacia.getVip());
         completoDTO.setFarmaciaTexto(farmacia.getTexto());
+        completoDTO.setFarmaciaUsuarioAcesso(farmacia.getUsuarioAcesso());
+        completoDTO.setFarmaciaSenhaAcesso(farmacia.getSenhaAcesso());
         if (farmacia.getAdministrador() != null) {
             completoDTO.setFarmaciaAdministradorId(farmacia.getAdministrador().getId());
         }
@@ -82,6 +78,13 @@ public class FarmaciaService {
         completoDTO.setFarmaciaTotalAvaliacoes1(Math.toIntExact(avaliacoes.stream().filter(a -> a.getValor().equals(1)).count()));
         completoDTO.setFarmaciaAvaliacoes(avaliacoes);
 
+        List<FormaPagamento> formaPagamentos = formaPagamentoRepository.findAllByFarmacia(farmacia);
+        formaPagamentos.forEach(formaPagamento -> formaPagamento.setFarmacia(null));
+        completoDTO.setFarmaciaPagamentos(formaPagamentos);
+
+        List<Funcionamento> funcionamentos = funcionamentoRepository.findAllByFarmacia(farmacia);
+        funcionamentos.forEach(funcionamento -> funcionamento.setFarmacia(null));
+        completoDTO.setFarmaciaFuncionamentos(funcionamentos);
 
         return completoDTO;
     }

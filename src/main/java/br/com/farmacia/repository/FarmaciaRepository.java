@@ -9,7 +9,7 @@ import java.util.List;
 public interface FarmaciaRepository extends JpaRepository<Farmacia, Long> {
 
     List<Farmacia> findAllByVipIsTrue();
-
     List<Farmacia> findAllByAdministrador(Administrador administrador);
+    Farmacia findTopByUsuarioAcessoAndSenhaAcesso(String usuario, String senha);
 
 }

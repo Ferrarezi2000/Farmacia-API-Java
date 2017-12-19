@@ -30,15 +30,12 @@ public class FormFarmaciaBuildCompleto {
         farmacia.setLocalidade(dto.getFarmaciaLocalidade());
         farmacia.setVip(dto.getFarmaciaVip());
         farmacia.setTexto(dto.getFarmaciaTexto());
-        farmacia.setHoraAbrir(dto.getFarmaciaHoraAbrir());
-        farmacia.setHoraFechar(dto.getFarmaciaHoraFechar());
         farmacia.setCodigoImagem(dto.getFarmaciaNome() + '.' + dto.getFarmaciaLocalidade());
         if (farmacia.getId() == null) {
             farmacia.setAcesso(0);
         } else {
             farmacia.setAcesso(dto.getFarmaciaAcesso());
         }
-//        farmacia.setAvaliacao(dto.getFarmaciaAvaliacao());
         farmaciaRepository.save(farmacia);
 
 

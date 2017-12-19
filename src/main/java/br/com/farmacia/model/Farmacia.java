@@ -1,5 +1,6 @@
 package br.com.farmacia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,12 +32,6 @@ public class Farmacia implements Serializable {
     @NotNull
     private String codigoImagem;
 
-    @NotNull
-    private String horaAbrir;
-
-    @NotNull
-    private String horaFechar;
-
     private String texto;
 
     private Boolean ativo;
@@ -45,18 +40,29 @@ public class Farmacia implements Serializable {
 
     private BigDecimal valorMensal;
 
-//    private Integer avaliacao;
-
     private Integer acesso;
 
+    private String senhaAcesso;
+
+    private String usuarioAcesso;
+
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;
 
     @Transient
     private List<Contato> contatos;
+
+    @Transient
+    private List<Funcionamento> funcionamentos;
+
+    @Transient
+    private List<FormaPagamento> pagamentos;
+
     @Transient
     private Endereco endereco;
+
     @Transient
     private Double media;
 

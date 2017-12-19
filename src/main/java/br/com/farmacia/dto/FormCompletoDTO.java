@@ -2,6 +2,8 @@ package br.com.farmacia.dto;
 
 import br.com.farmacia.model.Avaliacao;
 import br.com.farmacia.model.Contato;
+import br.com.farmacia.model.FormaPagamento;
+import br.com.farmacia.model.Funcionamento;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,8 +24,6 @@ public class FormCompletoDTO implements Serializable {
     private Boolean farmaciaVip;
     private BigDecimal farmaciaValorMensal;
     private String farmaciaTexto;
-    private String farmaciaHoraAbrir;
-    private String farmaciaHoraFechar;
     private Integer farmaciaAvaliacao;
     private Integer farmaciaAcesso;
     private String administradorToken;
@@ -36,6 +36,10 @@ public class FormCompletoDTO implements Serializable {
     private Integer farmaciaTotalAvaliacoes3;
     private Integer farmaciaTotalAvaliacoes2;
     private Integer farmaciaTotalAvaliacoes1;
+    private String farmaciaSenhaAcesso;
+    private String farmaciaUsuarioAcesso;
+    private List<FormaPagamento> farmaciaPagamentos;
+    private List<Funcionamento> farmaciaFuncionamentos;
 
 //    Patrocinador
     private Long patrocinadorId;
@@ -44,12 +48,20 @@ public class FormCompletoDTO implements Serializable {
     private Boolean patrocinadorAtivo;
     private BigDecimal patrocinadorValorMensal;
     private String patrocinadorTexto;
-    private String patrocinadorHoraAbrir;
-    private String patrocinadorHoraFechar;
     private Integer patrocinadorAvaliacao;
     private Integer patrocinadorAcesso;
     private List<Avaliacao> patrocinadorAvaliacoes;
     private Double patrocinadorMediaAvaliacao;
+    private Integer patrocinadorTotalAvaliacoes;
+    private Integer patrocinadorTotalAvaliacoes5;
+    private Integer patrocinadorTotalAvaliacoes4;
+    private Integer patrocinadorTotalAvaliacoes3;
+    private Integer patrocinadorTotalAvaliacoes2;
+    private Integer patrocinadorTotalAvaliacoes1;
+    private String patrocinadorSenhaAcesso;
+    private String patrocinadorUsuarioAcesso;
+    private List<FormaPagamento> patrocinadorPagamentos;
+    private List<Funcionamento> patrocinadorFuncionamentos;
 
 //    Endereço
     private Long enderecoId;

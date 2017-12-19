@@ -3,6 +3,7 @@ package br.com.farmacia.controller;
 import br.com.farmacia.builder.cadastro.FormFarmaciaBuildCompleto;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
+import br.com.farmacia.dto.FarmaciaDTO;
 import br.com.farmacia.dto.FormCompletoDTO;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.ResponseRest;

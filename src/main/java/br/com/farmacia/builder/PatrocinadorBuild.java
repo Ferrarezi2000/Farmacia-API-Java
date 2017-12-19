@@ -23,6 +23,8 @@ public class PatrocinadorBuild {
         patrocinador.setValorMensal(dto.getValorMensal());
         patrocinador.setAdministrador(administrador);
         patrocinador.setNome(dto.getNome());
+        patrocinador.setUsuarioAcesso(dto.getUsuarioAcesso());
+        patrocinador.setSenhaAcesso(dto.getSenhaAcesso());
 
         return patrocinador;
     }

@@ -29,8 +29,8 @@ public class FormPatrocinadorBuildCompleto {
         patrocinador.setNome(dto.getPatrocinadorNome());
         patrocinador.setAtivo(dto.getPatrocinadorAtivo());
         patrocinador.setTexto(dto.getPatrocinadorTexto());
-        patrocinador.setHoraAbrir(dto.getPatrocinadorHoraAbrir());
-        patrocinador.setHoraFechar(dto.getPatrocinadorHoraFechar());
+//        patrocinador.setHoraAbrir(dto.getPatrocinadorHoraAbrir());
+//        patrocinador.setHoraFechar(dto.getPatrocinadorHoraFechar());
         if (patrocinador.getId() == null) {
             patrocinador.setAcesso(0);
         } else {

@@ -10,5 +10,6 @@ public interface PatrocinadorRepository extends JpaRepository<Patrocinador, Long
 
     List<Patrocinador> findAllByAtivoIsTrue();
     List<Patrocinador> findAllByAdministrador(Administrador administrador);
+    Patrocinador findTopByUsuarioAcessoAndSenhaAcesso(String usuario, String senha);
 
 }

@@ -1,6 +1,5 @@
 package br.com.farmacia.model;
 
-import com.sun.istack.internal.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,24 +7,26 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-@Table(catalog = "farmacia", name = "avaliacao")
+@Table(catalog = "farmacia", name = "funcionamento")
 @EqualsAndHashCode
-public class Avaliacao implements Serializable {
+public class Funcionamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
-    private String usuarioNome;
+    private String diaSemama;
 
     @NotEmpty
-    private String usuarioSobrenome;
+    private String inicio;
+
+    @NotEmpty
+    private String fim;
 
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
@@ -34,14 +35,5 @@ public class Avaliacao implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_patrocinador")
     private Patrocinador patrocinador;
-
-    @NotNull
-    private Integer valor;
-
-    private String comentario;
-
-    private Date momento;
-
-    private String resposta;
 
 }

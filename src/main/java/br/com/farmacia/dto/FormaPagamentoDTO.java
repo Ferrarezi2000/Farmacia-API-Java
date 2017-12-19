@@ -7,15 +7,11 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class AvaliacaoDTO implements Serializable {
+public class FormaPagamentoDTO implements Serializable {
 
     private Long id;
-    private String usuarioSobrenome;
-    private String usuarioNome;
+    private String tipo;
     private Long farmaciaId;
     private Long patrocinadorId;
-    private Integer valor;
-    private String comentario;
-    private String resposta;
 
 }

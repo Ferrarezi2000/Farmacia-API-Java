@@ -10,6 +10,8 @@ import br.com.farmacia.repository.PatrocinadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class AvaliacaoBuild {
 
@@ -30,6 +32,8 @@ public class AvaliacaoBuild {
         avaliacao.setUsuarioNome(dto.getUsuarioNome());
         avaliacao.setUsuarioSobrenome(dto.getUsuarioSobrenome());
         avaliacao.setValor(dto.getValor());
+        avaliacao.setComentario(dto.getComentario());
+        avaliacao.setMomento(new Date());
         avaliacaoRepository.save(avaliacao);
 
         return avaliacao;

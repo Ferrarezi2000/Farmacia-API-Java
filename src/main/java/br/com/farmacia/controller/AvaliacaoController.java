@@ -5,6 +5,7 @@ import br.com.farmacia.dto.AvaliacaoDTO;
 import br.com.farmacia.model.Avaliacao;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.AvaliacaoRepository;
+import br.com.farmacia.service.AvaliacaoService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class AvaliacaoController extends AbstractRestController{
 
     @Autowired private AvaliacaoRepository repository;
     @Autowired private AvaliacaoBuild build;
+    @Autowired private AvaliacaoService service;
 
     @GetMapping
     public ResponseEntity<List<Avaliacao>> listar() {
@@ -51,5 +53,12 @@ public class AvaliacaoController extends AbstractRestController{
         Assert.notNull(entity, "Avaliacão não encontrada.");
         repository.delete(entity);
         return ResponseRest.ok("Avaliacão excluída com suecesso.");
+    }
+
+    @PutMapping("/resposta/{id}")
+    public ResponseEntity<?> resposta(@PathVariable("id") Avaliacao entity, @RequestBody AvaliacaoDTO dto) {
+        Assert.notNull(entity, "Avaliacão não encontrada.");
+        service.setarResposta(entity, dto);
+        return ResponseRest.ok("Sua resposta foi cadastrada com sucesso!");
     }
 }

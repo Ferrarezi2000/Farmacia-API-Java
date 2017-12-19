@@ -3,7 +3,9 @@ package br.com.farmacia.controller;
 import br.com.farmacia.builder.cadastro.FormPatrocinadorBuildCompleto;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
+import br.com.farmacia.dto.FarmaciaDTO;
 import br.com.farmacia.dto.FormCompletoDTO;
+import br.com.farmacia.dto.PatrocinadorDTO;
 import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.PatrocinadorRepository;
@@ -29,7 +31,7 @@ public class PatrocinadorController extends AbstractRestController{
 
     @GetMapping
     public ResponseEntity<List<Patrocinador>> listar() {
-        return ResponseRest.list(patrocinadorService.findAll());
+        return ResponseRest.list(patrocinadorService.findAllMedia());
     }
 
     @PostMapping
