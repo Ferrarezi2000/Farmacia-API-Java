@@ -21,10 +21,10 @@ public class LogarController extends AbstractRestController{
     @PostMapping
     public ResponseEntity<?> logar(@RequestBody LogarDTO dto) {
         Farmacia farmacia = logarService.logarFarmacia(dto.getUsuarioAcesso(), dto.getSenhaAcesso());
-        Patrocinador patrocinador = logarService.logarPatrocinador(dto.getUsuarioAcesso(), dto.getSenhaAcesso());
         if (farmacia != null) {
             return ResponseRest.object(farmacia);
         }
+        Patrocinador patrocinador = logarService.logarPatrocinador(dto.getUsuarioAcesso(), dto.getSenhaAcesso());
         if (patrocinador != null) {
             return ResponseRest.object(patrocinador);
         }

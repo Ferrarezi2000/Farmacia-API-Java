@@ -27,6 +27,8 @@ public class Avaliacao implements Serializable {
     @NotEmpty
     private String usuarioSobrenome;
 
+    private String imagem;
+
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
     private Farmacia farmacia;

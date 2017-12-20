@@ -53,9 +53,14 @@ public class Patrocinador implements Serializable {
 
     @Transient
     private Endereco endereco;
+
     @Transient
     private List<Contato> contatos;
+
     @Transient
     private Double media;
+
+    @Transient
+    private List<Avaliacao> avaliacoes;
 
 }

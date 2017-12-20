@@ -66,4 +66,7 @@ public class Farmacia implements Serializable {
     @Transient
     private Double media;
 
+    @Transient
+    private List<Avaliacao> avaliacoes;
+
 }

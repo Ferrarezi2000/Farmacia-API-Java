@@ -34,6 +34,7 @@ public class AvaliacaoBuild {
         avaliacao.setValor(dto.getValor());
         avaliacao.setComentario(dto.getComentario());
         avaliacao.setMomento(new Date());
+        avaliacao.setImagem(dto.getImagem());
         avaliacaoRepository.save(avaliacao);
 
         return avaliacao;

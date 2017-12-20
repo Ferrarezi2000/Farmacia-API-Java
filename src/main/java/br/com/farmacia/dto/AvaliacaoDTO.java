@@ -17,5 +17,6 @@ public class AvaliacaoDTO implements Serializable {
     private Integer valor;
     private String comentario;
     private String resposta;
+    private String imagem;
 
 }
