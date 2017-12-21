@@ -27,6 +27,7 @@ public class PatrocinadorService {
             Double totalSoma = avaliacoes.stream().mapToDouble(a -> a.getValor()).sum();
             Double media = totalSoma / avaliacoes.size();
             patrocinador.setMedia(Math.round(media / 0.5) * 0.5);
+            patrocinador.setTotalAvaliacoes(avaliacoes.size());
         });
         return patrocinadores;
     }

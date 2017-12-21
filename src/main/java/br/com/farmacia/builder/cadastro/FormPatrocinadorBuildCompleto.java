@@ -36,7 +36,7 @@ public class FormPatrocinadorBuildCompleto {
         } else {
             patrocinador.setAcesso(dto.getPatrocinadorAcesso());
         }
-        patrocinador.setAvaliacao(dto.getPatrocinadorAvaliacao());
+//        patrocinador.setAvaliacao(dto.getPatrocinadorAvaliacao());
         patrocinadorRepository.save(patrocinador);
 
 

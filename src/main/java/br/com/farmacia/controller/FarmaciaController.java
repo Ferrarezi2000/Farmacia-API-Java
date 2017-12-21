@@ -6,8 +6,10 @@ import br.com.farmacia.dto.AdministradorDTO;
 import br.com.farmacia.dto.FarmaciaDTO;
 import br.com.farmacia.dto.FormCompletoDTO;
 import br.com.farmacia.model.Farmacia;
+import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.FarmaciaRepository;
+import br.com.farmacia.service.FarmaciaAPPService;
 import br.com.farmacia.service.FarmaciaService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class FarmaciaController extends AbstractRestController{
     @Autowired private FormFarmaciaBuildCompleto farmaciaBuildCadastro;
     @Autowired private FarmaciaService service;
     @Autowired private Security security;
+    @Autowired private FarmaciaAPPService farmaciaAPPService;
 
     @GetMapping
     public ResponseEntity<List<Farmacia>> listar() {
@@ -58,6 +61,12 @@ public class FarmaciaController extends AbstractRestController{
         Assert.notNull(entity, "Farmácia não encontrada.");
         FormCompletoDTO completoDTO = service.completo(entity);
         return ResponseRest.object(completoDTO);
+    }
+
+    @GetMapping("/buscarApp/{id}")
+    public ResponseEntity<?> buscarApp(@PathVariable("id") Farmacia entity) {
+        Assert.notNull(entity, "Farmacia não encontrado.");
+        return ResponseRest.object(farmaciaAPPService.build(entity));
     }
 
     @PutMapping("/{id}")

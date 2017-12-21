@@ -10,8 +10,11 @@ import java.util.List;
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 
     List<Avaliacao> findAllByFarmaciaOrderByValorDesc(Farmacia farmacia);
-    List<Avaliacao> findAllByPatrocinadorOrderByValorDesc(Patrocinador patrocinador);
     List<Avaliacao> findAllByFarmaciaAndComentarioNotNullAndRespostaIsNull(Farmacia farmacia);
+    List<Avaliacao> findAllByFarmacia(Farmacia farmacia);
+
+    List<Avaliacao> findAllByPatrocinadorOrderByValorDesc(Patrocinador patrocinador);
     List<Avaliacao> findAllByPatrocinadorAndComentarioNotNullAndRespostaIsNull(Patrocinador patrocinador);
+    List<Avaliacao> findAllByPatrocinador(Patrocinador patrocinador);
 
 }

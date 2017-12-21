@@ -69,4 +69,22 @@ public class Farmacia implements Serializable {
     @Transient
     private List<Avaliacao> avaliacoes;
 
+    @Transient
+    private Integer totalAvaliacoes;
+
+    @Transient
+    private Integer totalAvaliacoes5;
+
+    @Transient
+    private Integer totalAvaliacoes4;
+
+    @Transient
+    private Integer totalAvaliacoes3;
+
+    @Transient
+    private Integer totalAvaliacoes2;
+
+    @Transient
+    private Integer totalAvaliacoes1;
+
 }

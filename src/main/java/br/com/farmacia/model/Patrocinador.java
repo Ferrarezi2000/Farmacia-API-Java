@@ -30,16 +30,8 @@ public class Patrocinador implements Serializable {
     @NotNull
     private BigDecimal valorMensal;
 
-//    @NotNull
-//    private String horaAbrir;
-//
-//    @NotNull
-//    private String horaFechar;
-
     @NotEmpty
     private String texto;
-
-    private Integer avaliacao;
 
     private Integer acesso;
 
@@ -58,9 +50,33 @@ public class Patrocinador implements Serializable {
     private List<Contato> contatos;
 
     @Transient
+    private List<Funcionamento> funcionamentos;
+
+    @Transient
+    private List<FormaPagamento> pagamentos;
+
+    @Transient
     private Double media;
 
     @Transient
     private List<Avaliacao> avaliacoes;
+
+    @Transient
+    private Integer totalAvaliacoes;
+
+    @Transient
+    private Integer totalAvaliacoes5;
+
+    @Transient
+    private Integer totalAvaliacoes4;
+
+    @Transient
+    private Integer totalAvaliacoes3;
+
+    @Transient
+    private Integer totalAvaliacoes2;
+
+    @Transient
+    private Integer totalAvaliacoes1;
 
 }

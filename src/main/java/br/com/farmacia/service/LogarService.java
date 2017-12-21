@@ -21,13 +21,13 @@ public class LogarService {
     public Farmacia logarFarmacia(String usuario, String senha) {
         Farmacia farmacia = farmaciaRepository.findTopByUsuarioAcessoAndSenhaAcesso(usuario, senha);
 
+        List<Avaliacao> avaliacoesTotal = avaliacaoRepository.findAllByFarmacia(farmacia);
+        Double totalSoma = avaliacoesTotal.stream().mapToDouble(a -> a.getValor()).sum();
+        Double media = totalSoma / avaliacoesTotal.size();
+        farmacia.setMedia(Math.round(media / 0.5) * 0.5);
+
         List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByFarmaciaAndComentarioNotNullAndRespostaIsNull(farmacia);
         avaliacoes.forEach(avaliacao -> avaliacao.setFarmacia(null));
-
-        Double totalSoma = avaliacoes.stream().mapToDouble(a -> a.getValor()).sum();
-        Double media = totalSoma / avaliacoes.size();
-
-        farmacia.setMedia(Math.round(media / 0.5) * 0.5);
         farmacia.setAvaliacoes(avaliacoes);
         farmacia.setAdministrador(null);
         return farmacia;
@@ -36,13 +36,13 @@ public class LogarService {
     public Patrocinador logarPatrocinador(String usuario, String senha) {
         Patrocinador patrocinador = patrocinadorRepository.findTopByUsuarioAcessoAndSenhaAcesso(usuario, senha);
 
+        List<Avaliacao> avaliacoesTotal = avaliacaoRepository.findAllByPatrocinador(patrocinador);
+        Double totalSoma = avaliacoesTotal.stream().mapToDouble(a -> a.getValor()).sum();
+        Double media = totalSoma / avaliacoesTotal.size();
+        patrocinador.setMedia(Math.round(media / 0.5) * 0.5);
+
         List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByPatrocinadorAndComentarioNotNullAndRespostaIsNull(patrocinador);
         avaliacoes.forEach(avaliacao -> avaliacao.setPatrocinador(null));
-
-        Double totalSoma = avaliacoes.stream().mapToDouble(a -> a.getValor()).sum();
-        Double media = totalSoma / avaliacoes.size();
-
-        patrocinador.setMedia(Math.round(media / 0.5) * 0.5);
         patrocinador.setAvaliacoes(avaliacoes);
         return patrocinador;
     }

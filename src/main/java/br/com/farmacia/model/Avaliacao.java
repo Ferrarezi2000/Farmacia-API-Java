@@ -24,10 +24,14 @@ public class Avaliacao implements Serializable {
     @NotEmpty
     private String usuarioNome;
 
-    @NotEmpty
-    private String usuarioSobrenome;
+//    @NotEmpty
+//    private String usuarioSobrenome;
 
-    private String imagem;
+    private String usuarioImagem;
+
+    private String emailFacebook;
+
+    private String facebookId;
 
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
@@ -42,6 +46,7 @@ public class Avaliacao implements Serializable {
 
     private String comentario;
 
+    @Temporal(TemporalType.DATE)
     private Date momento;
 
     private String resposta;

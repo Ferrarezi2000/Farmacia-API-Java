@@ -9,6 +9,7 @@ import br.com.farmacia.dto.PatrocinadorDTO;
 import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.model.ResponseRest;
 import br.com.farmacia.repository.PatrocinadorRepository;
+import br.com.farmacia.service.PatrocinadorAPPService;
 import br.com.farmacia.service.PatrocinadorService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class PatrocinadorController extends AbstractRestController{
     @Autowired private FormPatrocinadorBuildCompleto build;
     @Autowired private PatrocinadorService patrocinadorService;
     @Autowired private Security security;
+    @Autowired private PatrocinadorAPPService patrocinadorAPPService;
 
     @GetMapping
     public ResponseEntity<List<Patrocinador>> listar() {
@@ -46,6 +48,12 @@ public class PatrocinadorController extends AbstractRestController{
         Assert.notNull(entity, "Patrocinador não encontrado.");
         FormCompletoDTO formCompletoDTO = patrocinadorService.completo(entity);
         return ResponseRest.object(formCompletoDTO);
+    }
+
+    @GetMapping("/buscarApp/{id}")
+    public ResponseEntity<?> buscarApp(@PathVariable("id") Patrocinador entity) {
+        Assert.notNull(entity, "Patrocinador não encontrado.");
+        return ResponseRest.object(patrocinadorAPPService.build(entity));
     }
 
     @PutMapping("/{id}")

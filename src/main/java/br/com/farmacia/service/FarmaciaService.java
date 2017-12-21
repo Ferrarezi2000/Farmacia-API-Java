@@ -25,6 +25,7 @@ public class FarmaciaService {
             Double totalSoma = avaliacoes.stream().mapToDouble(a -> a.getValor()).sum();
             Double media = totalSoma / avaliacoes.size();
             farmacia.setMedia(Math.round(media / 0.5) * 0.5);
+            farmacia.setTotalAvaliacoes(avaliacoes.size());
         });
         return farmacias;
     }
