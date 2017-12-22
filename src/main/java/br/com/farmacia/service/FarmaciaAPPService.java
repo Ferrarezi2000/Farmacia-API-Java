@@ -51,6 +51,10 @@ public class FarmaciaAPPService {
         funcionamentos.forEach(funcionamento -> funcionamento.setFarmacia(null));
         farmacia.setFuncionamentos(funcionamentos);
 
+//        if (farmacia.getAdicionais()) {
+//            farmacia.setListaAdicionais(adicionalRepository.findAllByFarmacia(farmacia));
+//        }
+
         return farmacia;
     }
 }

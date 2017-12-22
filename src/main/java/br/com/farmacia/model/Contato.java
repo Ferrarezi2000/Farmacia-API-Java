@@ -24,7 +24,7 @@ public class Contato implements Serializable {
     private String tipo;
 
     @NotEmpty
-    private String texto;
+    private String numero;
 
     @ManyToOne
     @JoinColumn(name = "id_farmacia")
@@ -34,6 +34,5 @@ public class Contato implements Serializable {
     @JoinColumn(name = "id_patrocinador")
     private Patrocinador patrocinador;
 
-    private Boolean ativo;
 
 }

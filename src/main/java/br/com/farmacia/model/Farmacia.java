@@ -36,6 +36,12 @@ public class Farmacia implements Serializable {
 
     private Boolean ativo;
 
+    private Boolean adicionais = false;
+
+    private String tituloAdicionais;
+
+    private String textoAdicionais;
+
     private Boolean vip;
 
     private BigDecimal valorMensal;
@@ -45,6 +51,9 @@ public class Farmacia implements Serializable {
     private String senhaAcesso;
 
     private String usuarioAcesso;
+
+    @NotNull
+    private Boolean delivery;
 
     @ManyToOne
     @JsonIgnore
@@ -86,5 +95,8 @@ public class Farmacia implements Serializable {
 
     @Transient
     private Integer totalAvaliacoes1;
+
+    @Transient
+    private List<Adicional> listaAdicionais;
 
 }

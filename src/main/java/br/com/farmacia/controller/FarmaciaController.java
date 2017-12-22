@@ -1,5 +1,6 @@
 package br.com.farmacia.controller;
 
+import br.com.farmacia.builder.FarmaciaEditarBuild;
 import br.com.farmacia.builder.cadastro.FormFarmaciaBuildCompleto;
 import br.com.farmacia.config.Security;
 import br.com.farmacia.dto.AdministradorDTO;
@@ -30,6 +31,7 @@ public class FarmaciaController extends AbstractRestController{
     @Autowired private FarmaciaService service;
     @Autowired private Security security;
     @Autowired private FarmaciaAPPService farmaciaAPPService;
+    @Autowired private FarmaciaEditarBuild farmaciaEditarBuild;
 
     @GetMapping
     public ResponseEntity<List<Farmacia>> listar() {
@@ -54,6 +56,29 @@ public class FarmaciaController extends AbstractRestController{
         security.check(dto.getAdministradorSobrenome(), dto.getAdministradorToken());
         farmaciaBuildCadastro.build(dto);
         return ResponseRest.ok("Farmácia cadastrada com sucesso.");
+    }
+
+    @PostMapping("/editar/perfilApp/{id}")
+    public ResponseEntity<?> perfilApp(@PathVariable("id")Farmacia farmacia, @RequestBody FarmaciaDTO dto){
+        return ResponseRest.object(farmaciaEditarBuild.buildPerfil(farmacia, dto));
+    }
+
+    @PostMapping("/editar/contatosApp/{id}")
+    public ResponseEntity<?> contatosApp(@PathVariable("id")Farmacia farmacia, @RequestBody FarmaciaDTO dto) {
+        farmaciaEditarBuild.buildContatos(farmacia, dto);
+        return ResponseRest.ok("Contatos atualizados com sucesso!");
+    }
+
+    @PostMapping("/editar/enderecoApp/{id}")
+    public ResponseEntity<?> enderecoApp(@PathVariable("id")Farmacia farmacia, @RequestBody FarmaciaDTO dto) {
+        farmaciaEditarBuild.buildEndereco(farmacia, dto);
+        return ResponseRest.ok("Endereço atualizado com sucesso!");
+    }
+
+    @PostMapping("/editar/adicionalApp/{id}")
+    public ResponseEntity<?> adicionalApp(@PathVariable("id")Farmacia farmacia, @RequestBody FarmaciaDTO dto) {
+        farmaciaEditarBuild.buildAdicional(farmacia, dto);
+        return ResponseRest.ok("Adicional atualizado com sucesso!");
     }
 
     @GetMapping("/{id}")

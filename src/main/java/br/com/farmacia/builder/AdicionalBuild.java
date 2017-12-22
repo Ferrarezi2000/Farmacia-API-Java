@@ -1,36 +1,37 @@
 package br.com.farmacia.builder;
 
-import br.com.farmacia.dto.ContatoDTO;
-import br.com.farmacia.model.Contato;
+import br.com.farmacia.dto.AdicionalDTO;
+import br.com.farmacia.model.Adicional;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.Patrocinador;
-import br.com.farmacia.repository.ContatoRepository;
+import br.com.farmacia.repository.AdicionalRepository;
 import br.com.farmacia.repository.FarmaciaRepository;
 import br.com.farmacia.repository.PatrocinadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContatoBuild {
+public class AdicionalBuild {
 
+    @Autowired private AdicionalRepository adicionalRepository;
     @Autowired private FarmaciaRepository farmaciaRepository;
-    @Autowired private ContatoRepository contatoRepository;
     @Autowired private PatrocinadorRepository patrocinadorRepository;
 
-    public Contato build(Contato contato, ContatoDTO dto) {
+    public Adicional build(Adicional adicional, AdicionalDTO dto) {
 
         if (dto.getFarmaciaId() != null) {
             Farmacia farmacia = farmaciaRepository.findOne(dto.getFarmaciaId());
-            contato.setFarmacia(farmacia);
+            adicional.setFarmacia(farmacia);
         } else {
             Patrocinador patrocinador = patrocinadorRepository.findOne(dto.getPatrocinadorId());
-            contato.setPatrocinador(patrocinador);
+            adicional.setPatrocinador(patrocinador);
         }
 
-        contato.setNumero(dto.getNumero());
-        contato.setTipo(dto.getTipo());
-        contatoRepository.save(contato);
+        adicional.setItem(dto.getItem());
+        adicional.setValor(dto.getValor());
+        adicional.setSubItem(dto.getSubItem());
+        adicionalRepository.save(adicional);
 
-        return contato;
+        return adicional;
     }
 }

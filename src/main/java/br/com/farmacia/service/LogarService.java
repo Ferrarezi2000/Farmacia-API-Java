@@ -1,11 +1,7 @@
 package br.com.farmacia.service;
 
-import br.com.farmacia.model.Avaliacao;
-import br.com.farmacia.model.Farmacia;
-import br.com.farmacia.model.Patrocinador;
-import br.com.farmacia.repository.AvaliacaoRepository;
-import br.com.farmacia.repository.FarmaciaRepository;
-import br.com.farmacia.repository.PatrocinadorRepository;
+import br.com.farmacia.model.*;
+import br.com.farmacia.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +13,9 @@ public class LogarService {
     @Autowired private FarmaciaRepository farmaciaRepository;
     @Autowired private PatrocinadorRepository patrocinadorRepository;
     @Autowired private AvaliacaoRepository avaliacaoRepository;
+    @Autowired private ContatoRepository contatoRepository;
+    @Autowired private EnderecoRepository enderecoRepository;
+    @Autowired private AdicionalRepository adicionalRepository;
 
     public Farmacia logarFarmacia(String usuario, String senha) {
         Farmacia farmacia = farmaciaRepository.findTopByUsuarioAcessoAndSenhaAcesso(usuario, senha);
@@ -30,6 +29,18 @@ public class LogarService {
         avaliacoes.forEach(avaliacao -> avaliacao.setFarmacia(null));
         farmacia.setAvaliacoes(avaliacoes);
         farmacia.setAdministrador(null);
+
+        List<Contato> contatos = contatoRepository.findAllByFarmacia(farmacia);
+        contatos.forEach(contato -> contato.setFarmacia(null));
+        farmacia.setContatos(contatos);
+
+        Endereco endereco = enderecoRepository.findTopByFarmacia(farmacia);
+        endereco.setFarmacia(null);
+        farmacia.setEndereco(endereco);
+
+        List<Adicional> adicionais = adicionalRepository.findAllByFarmacia(farmacia);
+        adicionais.forEach(adicional -> adicional.setFarmacia(null));
+        farmacia.setListaAdicionais(adicionais);
         return farmacia;
     }
 
@@ -44,6 +55,18 @@ public class LogarService {
         List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByPatrocinadorAndComentarioNotNullAndRespostaIsNull(patrocinador);
         avaliacoes.forEach(avaliacao -> avaliacao.setPatrocinador(null));
         patrocinador.setAvaliacoes(avaliacoes);
+
+        List<Contato> contatos = contatoRepository.findAllByPatrocinador(patrocinador);
+        contatos.forEach(contato -> contato.setPatrocinador(null));
+        patrocinador.setContatos(contatos);
+
+        Endereco endereco = enderecoRepository.findTopByPatrocinador(patrocinador);
+        endereco.setPatrocinador(null);
+        patrocinador.setEndereco(endereco);
+
+        List<Adicional> adicionais = adicionalRepository.findAllByPatrocinador(patrocinador);
+        adicionais.forEach(adicional -> adicional.setFarmacia(null));
+        patrocinador.setListaAdicionais(adicionais);
         return patrocinador;
     }
 }

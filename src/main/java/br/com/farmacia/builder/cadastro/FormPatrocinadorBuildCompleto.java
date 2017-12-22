@@ -29,14 +29,15 @@ public class FormPatrocinadorBuildCompleto {
         patrocinador.setNome(dto.getPatrocinadorNome());
         patrocinador.setAtivo(dto.getPatrocinadorAtivo());
         patrocinador.setTexto(dto.getPatrocinadorTexto());
-//        patrocinador.setHoraAbrir(dto.getPatrocinadorHoraAbrir());
-//        patrocinador.setHoraFechar(dto.getPatrocinadorHoraFechar());
+        patrocinador.setAdicionais(dto.getPatrocinadorAdicionais());
+        patrocinador.setTituloAdicionais(dto.getPatrocinadorTituloAdicionais());
+        patrocinador.setTextoAdicionais(dto.getPatrocinadorTextoAdicionais());
+        patrocinador.setDelivery(dto.getPatrocinadorDelivery());
         if (patrocinador.getId() == null) {
             patrocinador.setAcesso(0);
         } else {
             patrocinador.setAcesso(dto.getPatrocinadorAcesso());
         }
-//        patrocinador.setAvaliacao(dto.getPatrocinadorAvaliacao());
         patrocinadorRepository.save(patrocinador);
 
 
@@ -46,7 +47,6 @@ public class FormPatrocinadorBuildCompleto {
             endereco.setId(dto.getEnderecoId());
         }
         endereco.setPatrocinador(patrocinador);
-        endereco.setAtivo(dto.getEnderecoAtivo());
         endereco.setBairro(dto.getEnderecoBairro());
         endereco.setLogradouro(dto.getEnderecoLogradouro());
         endereco.setNumero(dto.getEnderecoNumero());
@@ -57,9 +57,8 @@ public class FormPatrocinadorBuildCompleto {
             contato = contatoRepository.findOne(dto.getContatoId());
             contato.setId(dto.getContatoId());
         }
-        contato.setAtivo(dto.getContatoAtivo());
         contato.setPatrocinador(patrocinador);
-        contato.setTexto(dto.getContatoTexto());
+        contato.setNumero(dto.getContatoTexto());
         contato.setTipo(dto.getContatoTipo());
         contatoRepository.save(contato);
 

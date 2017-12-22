@@ -30,6 +30,10 @@ public class FormFarmaciaBuildCompleto {
         farmacia.setLocalidade(dto.getFarmaciaLocalidade());
         farmacia.setVip(dto.getFarmaciaVip());
         farmacia.setTexto(dto.getFarmaciaTexto());
+        farmacia.setAdicionais(dto.getFarmaciaAdicionais());
+        farmacia.setTituloAdicionais(dto.getFarmaciaTituloAdicionais());
+        farmacia.setTextoAdicionais(dto.getFarmaciaTextoAdicionais());
+        farmacia.setDelivery(dto.getFarmaciaDelivery());
         farmacia.setCodigoImagem(dto.getFarmaciaNome() + '.' + dto.getFarmaciaLocalidade());
         if (farmacia.getId() == null) {
             farmacia.setAcesso(0);
@@ -45,7 +49,6 @@ public class FormFarmaciaBuildCompleto {
             endereco.setId(dto.getEnderecoId());
         }
         endereco.setFarmacia(farmacia);
-        endereco.setAtivo(dto.getEnderecoAtivo());
         endereco.setBairro(dto.getEnderecoBairro());
         endereco.setLogradouro(dto.getEnderecoLogradouro());
         endereco.setNumero(dto.getEnderecoNumero());
@@ -56,9 +59,8 @@ public class FormFarmaciaBuildCompleto {
             contato = contatoRepository.findOne(dto.getContatoId());
             contato.setId(dto.getContatoId());
         }
-        contato.setAtivo(dto.getContatoAtivo());
         contato.setFarmacia(farmacia);
-        contato.setTexto(dto.getContatoTexto());
+        contato.setNumero(dto.getContatoTexto());
         contato.setTipo(dto.getContatoTipo());
         contatoRepository.save(contato);
 

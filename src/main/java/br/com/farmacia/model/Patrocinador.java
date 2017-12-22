@@ -39,6 +39,15 @@ public class Patrocinador implements Serializable {
 
     private String usuarioAcesso;
 
+    private Boolean adicionais = false;
+
+    private String tituloAdicionais;
+
+    private String textoAdicionais;
+
+    @NotNull
+    private Boolean delivery;
+
     @ManyToOne
     @JoinColumn(name = "id_administrador_comissao")
     private Administrador administrador;
@@ -78,5 +87,8 @@ public class Patrocinador implements Serializable {
 
     @Transient
     private Integer totalAvaliacoes1;
+
+    @Transient
+    private List<Adicional> listaAdicionais;
 
 }

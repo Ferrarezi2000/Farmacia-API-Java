@@ -15,7 +15,6 @@ public class EnderecoDTO implements Serializable {
     private String numero;
     private Long farmaciaId;
     private Long patrocinadorId;
-    private Boolean ativo;
 
     private String administradorToken;
     private String administradorSobrenome;

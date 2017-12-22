@@ -1,14 +1,18 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.dto.LogarDTO;
+import br.com.farmacia.model.Contato;
 import br.com.farmacia.model.Farmacia;
 import br.com.farmacia.model.Patrocinador;
 import br.com.farmacia.model.ResponseRest;
+import br.com.farmacia.repository.ContatoRepository;
 import br.com.farmacia.service.LogarService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin

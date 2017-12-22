@@ -49,7 +49,6 @@ public class FarmaciaService {
 
         Endereco endereco = enderecoRepository.findTopByFarmacia(farmacia);
         completoDTO.setEnderecoId(endereco.getId());
-        completoDTO.setEnderecoAtivo(endereco.getAtivo());
         completoDTO.setEnderecoBairro(endereco.getBairro());
         completoDTO.setEnderecoFarmaciaId(farmacia.getId());
         completoDTO.setEnderecoLogradouro(endereco.getLogradouro());

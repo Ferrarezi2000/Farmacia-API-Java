@@ -1,19 +1,15 @@
 package br.com.farmacia.service;
 
-import br.com.farmacia.dto.FormCompletoDTO;
-import br.com.farmacia.dto.PatrocinadorDTO;
 import br.com.farmacia.model.*;
 import br.com.farmacia.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.List;
 
 @Service
 public class PatrocinadorAPPService {
 
-    @Autowired private PatrocinadorRepository repository;
     @Autowired private EnderecoRepository enderecoRepository;
     @Autowired private ContatoRepository contatoRepository;
     @Autowired private AvaliacaoRepository avaliacaoRepository;

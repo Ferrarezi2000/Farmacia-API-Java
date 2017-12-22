@@ -52,7 +52,6 @@ public class PatrocinadorService {
 
         Endereco endereco = enderecoRepository.findTopByPatrocinador(patrocinador);
         completoDTO.setEnderecoId(endereco.getId());
-        completoDTO.setEnderecoAtivo(endereco.getAtivo());
         completoDTO.setEnderecoBairro(endereco.getBairro());
         completoDTO.setEnderecoPatrocinadorId(patrocinador.getId());
         completoDTO.setEnderecoLogradouro(endereco.getLogradouro());

@@ -42,6 +42,10 @@ public class FormCompletoDTO implements Serializable {
     private String farmaciaUsuarioAcesso;
     private List<FormaPagamento> farmaciaPagamentos;
     private List<Funcionamento> farmaciaFuncionamentos;
+    private Boolean farmaciaAdicionais;
+    private String farmaciaTituloAdicionais;
+    private Boolean farmaciaDelivery;
+    private String farmaciaTextoAdicionais;
 
 //    Patrocinador
     private Long patrocinadorId;
@@ -66,6 +70,10 @@ public class FormCompletoDTO implements Serializable {
     private String patrocinadorUsuarioAcesso;
     private List<FormaPagamento> patrocinadorPagamentos;
     private List<Funcionamento> patrocinadorFuncionamentos;
+    private Boolean patrocinadorAdicionais;
+    private String patrocinadorTituloAdicionais;
+    private Boolean patrocinadorDelivery;
+    private String patrocinadorTextoAdicionais;
 
 //    Endereço
     private Long enderecoId;
